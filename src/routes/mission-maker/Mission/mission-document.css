@@ -2,8 +2,12 @@
 	padding: 2rem;
 	min-height: 100%;
 	box-sizing: border-box;
+	counter-reset: page-number 0;
 
+	/*  PAGE
+	 *  ===================================================================== */
 	.page {
+		position: relative;
 		zoom: var(--page-scale, 1);
 		width: 8.5in;
 		min-height: 11in;
@@ -15,12 +19,55 @@
 		color: #1a1a1a;
 		font-size: 11pt;
 		line-height: 1.5;
+		counter-increment: page-number 1;
+	}
+
+	.page:nth-child(odd)::before {
+		content: "";
+		position: absolute;
+		inset: 0 auto 0 0;
+		inline-size: 0.25in;
+		background: var(--primary-color);
+	}
+
+	.page:nth-child(odd)::after {
+		content: counter(page-number, decimal);
+		position: absolute;
+		inset: auto auto 0.25in 0;
+		color: white;
+		background: var(--secondary-color);
+		font-size: 14pt;
+		display: inline-block;
+		padding: 0.125em 0.25em 0.125em calc(0.25in + 0.125em);
+		font-weight: bold;
+	}
+
+	.page:nth-child(even)::before {
+		content: "";
+		position: absolute;
+		inset: 0 0 0 auto;
+		inline-size: 0.25in;
+		background: var(--primary-color);
+	}
+
+	.page:nth-child(even)::after {
+		content: counter(page-number, decimal);
+		position: absolute;
+		inset: auto 0 0.25in auto;
+		color: white;
+		background: var(--secondary-color);
+		font-size: 14pt;
+		display: inline-block;
+		padding: 0.125em calc(0.25in + 0.125em) 0.125em 0.25em;
+		font-weight: bold;
 	}
 
 	.page:last-child {
 		margin-bottom: 0;
 	}
 
+	/*  HEADINGs
+	 *  ===================================================================== */
 	h1 {
 		color: var(--primary-color);
 	}
