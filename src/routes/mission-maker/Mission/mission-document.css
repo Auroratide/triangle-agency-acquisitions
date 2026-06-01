@@ -11,14 +11,14 @@
 		zoom: var(--page-scale, 1);
 		width: 8.5in;
 		min-height: 11in;
-		padding: 1in;
+		padding: 0.75in;
 		background: white;
 		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
 		margin: 0 auto 2rem;
 		box-sizing: border-box;
 		color: #1a1a1a;
-		font-size: 11pt;
-		line-height: 1.5;
+		font-size: 10pt;
+		line-height: 1.33;
 		counter-increment: page-number 1;
 	}
 
@@ -66,10 +66,16 @@
 		margin-bottom: 0;
 	}
 
-	/*  HEADINGs
+	/*  HEADINGS
 	 *  ===================================================================== */
 	h1 {
-		color: var(--primary-color);
+		color: white;
+		background: var(--primary-color);
+		display: inline-block;
+		text-transform: uppercase;
+		padding: 0.0625em 0.25em;
+		margin: 0;
+		font-size: 30pt;
 	}
 
 	h2 {
@@ -82,10 +88,21 @@
 
 	h3 {
 		color: var(--secondary-color);
+		margin: 0;
+		font-size: 17pt;
 	}
 
 	img {
 		max-width: 100%;
+	}
+
+	/*  CUSTOM ELEMENTS
+	 *  ===================================================================== */
+	two-columns {
+		display: block;
+		column-count: 2;
+		column-gap: 3em;
+		margin-block: 0.25in;
 	}
 }
 

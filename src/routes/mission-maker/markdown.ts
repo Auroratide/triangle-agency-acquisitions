@@ -3,6 +3,7 @@ import MarkdownIt from "markdown-it"
 let currentImageMap: Map<string, string> = new Map()
 
 const md = new MarkdownIt({
+	html: true,
 	breaks: true,
 	linkify: true,
 })
