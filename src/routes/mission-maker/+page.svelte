@@ -3,6 +3,8 @@
 </script>
 
 <script lang="ts">
+	import "./page.css"
+
 	import { onMount } from "svelte"
 	import {
 		DEFAULT_META,
@@ -343,10 +345,6 @@
 
 	:global(.preview-container .page:last-child) {
 		margin-bottom: 0;
-	}
-
-	:global(.preview-container .page h1) {
-		color: var(--primary-color);
 	}
 
 	:global(.preview-container .page h2) {
