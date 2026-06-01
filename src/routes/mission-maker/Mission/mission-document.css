@@ -111,6 +111,71 @@
 		font-size: 8pt;
 	}
 
+	ul.question-list,
+	ul.exclaim-list {
+		list-style: none;
+
+		li::marker {
+			content: none;
+		}
+
+		li {
+			border-inline-start: 0.375em solid var(--primary-color);
+			margin: 0;
+			padding: 0.25em 0 0.75em 1.375em;
+			position: relative;
+		}
+
+		li:last-child {
+			padding-bottom: 0;
+		}
+
+		li::before {
+			content: "";
+			display: block;
+			inline-size: 1.25em;
+			block-size: 1.25em;
+			border: 0.375em solid var(--primary-color);
+			border-radius: 1em;
+			background: white;
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			inset: 0.25em auto auto -0.8em;
+		}
+
+		li:first-child {
+			font-weight: bold;
+			border-color: transparent;
+		}
+
+		li:first-child::before {
+			color: var(--primary-color);
+			border: none;
+			background: var(--primary-color);
+			-webkit-mask-image: url("/icons/q-person.svg");
+			mask-image: url("/icons/q-person.svg");
+			-webkit-mask-size: contain;
+			mask-size: contain;
+			-webkit-mask-repeat: no-repeat;
+			mask-repeat: no-repeat;
+			border-radius: 0;
+			inline-size: 2.375em;
+			block-size: 2.375em;
+			inset: 0.25em auto auto -1.375em;
+		}
+	}
+
+	ul.question-list li:first-child::before {
+		-webkit-mask-image: url("/icons/q-person.svg");
+		mask-image: url("/icons/q-person.svg");
+	}
+
+	ul.exclaim-list li:first-child::before {
+		-webkit-mask-image: url("/icons/e-person.svg");
+		mask-image: url("/icons/e-person.svg");
+	}
+
 	/*  CUSTOM ELEMENTS
 	 *  ===================================================================== */
 	two-columns {
