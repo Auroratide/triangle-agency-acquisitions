@@ -232,7 +232,6 @@
 		flex-direction: column;
 		height: 100vh;
 		overflow: hidden;
-		font-family: system-ui, sans-serif;
 		background: #f0f0f0;
 	}
 
