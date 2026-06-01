@@ -79,11 +79,8 @@
 	}
 
 	h2 {
-		color: white;
-		background: var(--primary-color);
-		display: inline-block;
-		text-transform: uppercase;
-		padding: 0.0625em 0.25em;
+		color: var(--primary-color);
+		font-size: 30pt;
 	}
 
 	h3 {
@@ -96,6 +93,24 @@
 		max-width: 100%;
 	}
 
+	/*  LISTS
+	 *  ===================================================================== */
+	ul {
+		padding-inline-start: 8pt;
+	}
+
+	ul li {
+		padding-inline-start: 0.5em;
+		margin-block-end: 1em;
+	}
+
+	ul li::marker {
+		content: "▶";
+		display: inline-block;
+		color: var(--primary-color);
+		font-size: 8pt;
+	}
+
 	/*  CUSTOM ELEMENTS
 	 *  ===================================================================== */
 	two-columns {
@@ -103,6 +118,20 @@
 		column-count: 2;
 		column-gap: 3em;
 		margin-block: 0.25in;
+	}
+
+	chaos-table {
+		display: block;
+		border: 2px solid black;
+		border-radius: 1em;
+	}
+
+	chaos-row {
+		display: block;
+	}
+
+	chaos-row::before {
+		content: attr(amount) " " attr(name);
 	}
 }
 
