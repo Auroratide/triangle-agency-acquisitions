@@ -1,0 +1,49 @@
+.mission-document {
+	padding: 2rem;
+	min-height: 100%;
+	box-sizing: border-box;
+
+	.page {
+		zoom: var(--page-scale, 1);
+		width: 8.5in;
+		min-height: 11in;
+		padding: 1in;
+		background: white;
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+		margin: 0 auto 2rem;
+		box-sizing: border-box;
+		color: #1a1a1a;
+		font-size: 11pt;
+		line-height: 1.5;
+	}
+
+	.page:last-child {
+		margin-bottom: 0;
+	}
+
+	h1 {
+		color: var(--primary-color);
+	}
+
+	h2 {
+		color: white;
+		background: var(--primary-color);
+		display: inline-block;
+		text-transform: uppercase;
+		padding: 0.0625em 0.25em;
+	}
+
+	h3 {
+		color: var(--secondary-color);
+	}
+
+	img {
+		max-width: 100%;
+	}
+}
+
+@media print {
+	.mission-document {
+		padding: 0;
+	}
+}

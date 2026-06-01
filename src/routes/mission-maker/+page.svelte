@@ -3,8 +3,6 @@
 </script>
 
 <script lang="ts">
-	import "./page.css"
-
 	import { onMount } from "svelte"
 	import {
 		DEFAULT_META,
@@ -12,7 +10,8 @@
 		parseFrontmatter,
 		serializeFrontmatter,
 	} from "./frontmatter.ts"
-	import { extractImageKeys, renderToPages } from "./markdown.ts"
+	import { MissionDocument } from "./Mission/index.ts"
+	import { extractImageKeys } from "./markdown.ts"
 	import {
 		deleteImage,
 		getAllImageKeys,
@@ -30,8 +29,6 @@
 	let loaded = $state(false)
 
 	let textarea: HTMLTextAreaElement | undefined = $state()
-
-	let renderedHtml = $derived(renderToPages(editorContent, imageMap))
 
 	onMount(async () => {
 		const stored = await loadDocument()
@@ -92,26 +89,6 @@
 		}
 	}
 
-	function scalePages(node: HTMLElement) {
-		const PAGE_WIDTH_PX = 8.5 * 96
-
-		function measure() {
-			const style = getComputedStyle(node)
-			const available =
-				node.clientWidth -
-				parseFloat(style.paddingLeft) -
-				parseFloat(style.paddingRight)
-			const scale = Math.min(1, available / PAGE_WIDTH_PX)
-			node.style.setProperty("--page-scale", String(scale))
-		}
-
-		const ro = new ResizeObserver(measure)
-		ro.observe(node)
-		measure()
-
-		return { destroy: () => ro.disconnect() }
-	}
-
 	async function handlePaste(e: ClipboardEvent) {
 		const items = e.clipboardData?.items
 		if (!items) return
@@ -161,13 +138,14 @@
 
 	<div class="workspace" class:preview-only={previewOnly}>
 		<div class="preview-panel">
-			<div
-				class="preview-container"
-				use:scalePages
-				style="--primary-color: {meta.primaryColor || DEFAULT_META.primaryColor}; --secondary-color: {meta.secondaryColor || DEFAULT_META.secondaryColor}"
-			>
-				{@html renderedHtml}
-			</div>
+			<MissionDocument
+				theme={{
+				primary: meta.primaryColor,
+				secondary: meta.secondaryColor,
+			}}
+				content={editorContent}
+				images={imageMap}
+			/>
 		</div>
 
 		<div class="editor-panel">
@@ -321,38 +299,6 @@
 		flex: 1;
 		overflow: auto;
 		background: #c8c8c8;
-	}
-
-	.preview-container {
-		padding: 2rem;
-		min-height: 100%;
-		box-sizing: border-box;
-	}
-
-	:global(.preview-container .page) {
-		zoom: var(--page-scale, 1);
-		width: 8.5in;
-		min-height: 11in;
-		padding: 1in;
-		background: white;
-		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
-		margin: 0 auto 2rem;
-		box-sizing: border-box;
-		color: #1a1a1a;
-		font-size: 11pt;
-		line-height: 1.5;
-	}
-
-	:global(.preview-container .page:last-child) {
-		margin-bottom: 0;
-	}
-
-	:global(.preview-container .page h2) {
-		color: var(--secondary-color);
-	}
-
-	:global(.preview-container .page img) {
-		max-width: 100%;
 	}
 
 	/* ── Editor panel ─────────────────────────────── */
@@ -555,10 +501,6 @@
 			display: block;
 			overflow: visible;
 			background: none;
-		}
-
-		.preview-container {
-			padding: 0;
 		}
 
 		:global(.preview-container .page) {
