@@ -90,6 +90,13 @@
 		line-height: 1.25;
 	}
 
+	h4 {
+		color: var(--color-text);
+		font-size: var(--font-body);
+		font-weight: bold;
+		line-height: 1.25;
+	}
+
 	img {
 		max-width: 100%;
 	}
