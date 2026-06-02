@@ -338,6 +338,24 @@
 		inset: -32pt auto auto -2.5pt;
 	}
 
+	major-callout[type="requisition"] {
+		border-color: var(--color-competency);
+	}
+
+	major-callout[type="requisition"]::before {
+		border-color: var(--color-competency);
+		background-color: var(--color-competency);
+	}
+
+	major-callout[type="anomaly"] {
+		border-color: var(--color-anomaly);
+	}
+
+	major-callout[type="anomaly"]::before {
+		border-color: var(--color-anomaly);
+		background-color: var(--color-anomaly);
+	}
+
 	minor-callout {
 		display: block;
 		position: relative;
