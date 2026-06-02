@@ -176,6 +176,97 @@
 		mask-image: url("/icons/e-person.svg");
 	}
 
+	/*  CHAOS TABLE
+	 *  ===================================================================== */
+	table.chaos-table {
+		border: 2.5pt solid #10045a;
+		color: #10045a;
+		border-radius: 10pt;
+		border-spacing: 0;
+		inline-size: 100%;
+		margin-block: 2em;
+
+		caption {
+			color: red;
+			text-align: start;
+			font-size: 9pt;
+			display: none;
+		}
+
+		&:has(.new-effect) caption {
+			display: table-caption;
+		}
+
+		thead {
+			display: none;
+		}
+
+		tr {
+			position: relative;
+		}
+
+		td {
+			padding: 10pt;
+		}
+
+		td:nth-child(1) {
+			font-size: 24pt;
+			font-weight: bold;
+			text-align: center;
+			line-height: 1;
+			inline-size: 3em;
+			letter-spacing: -0.125ch;
+		}
+
+		td:nth-child(1)::after {
+			content: "";
+			background-image: url("/icons/chaos.png");
+			background-size: contain;
+			background-repeat: no-repeat;
+			display: inline-block;
+			inline-size: 0.75em;
+			block-size: 0.75em;
+			margin-inline-start: 0.175em;
+		}
+
+		td:nth-child(2) {
+			font-size: 13pt;
+			font-weight: bold;
+			text-align: center;
+			border-inline: 1.5pt solid #10045a;
+			line-height: 1;
+			inline-size: 7.5em;
+		}
+
+		tr:last-child td:nth-child(1) {
+			border-end-start-radius: 8pt;
+		}
+		tr:last-child td:nth-child(3) {
+			border-end-end-radius: 8pt;
+		}
+
+		tr.new-effect td:nth-child(2) {
+			color: var(--secondary-color);
+		}
+
+		tr.new-effect td:nth-child(1)::before {
+			content: "▲";
+			color: red;
+			font-size: 8pt;
+			inline-size: 1em;
+			block-size: 100%;
+			position: absolute;
+			inset-block-start: 0;
+			inset-inline-start: -2em;
+			display: flex;
+			align-items: center;
+		}
+
+		tr:nth-child(even) td {
+			background: #eaebf4;
+		}
+	}
+
 	/*  CUSTOM ELEMENTS
 	 *  ===================================================================== */
 	two-columns {
@@ -183,20 +274,6 @@
 		column-count: 2;
 		column-gap: 3em;
 		margin-block: 0.25in;
-	}
-
-	chaos-table {
-		display: block;
-		border: 2px solid black;
-		border-radius: 1em;
-	}
-
-	chaos-row {
-		display: block;
-	}
-
-	chaos-row::before {
-		content: attr(amount) " " attr(name);
 	}
 
 	major-callout {
