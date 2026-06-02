@@ -20,7 +20,7 @@
 		zoom: var(--page-scale, 1);
 		width: 8.5in;
 		aspect-ratio: 8.5 / 11;
-		/* min-height: 11in; */
+		max-height: 11in;
 		padding: 0.75in;
 		background: var(--bg);
 		box-shadow: 0 2px 12px oklch(0 0 0 / 0.25);
@@ -75,18 +75,23 @@
 		display: inline-block;
 		text-transform: uppercase;
 		padding: 0.0625em 0.25em;
-		margin: 0;
+		margin: 0.2in 0;
 		font-size: var(--font-heading);
 	}
 
 	h3 {
 		color: var(--primary-color);
 		font-size: var(--font-heading);
+		margin-block: 0.1in;
+	}
+
+	h2 + h3 {
+		margin-block-start: 0;
 	}
 
 	h4 {
 		color: var(--secondary-color);
-		margin: 0;
+		margin: 0.5em 0 0.375em 0;
 		font-size: calc(var(--font-lg) + 1pt);
 		line-height: 1.25;
 	}
@@ -96,6 +101,14 @@
 		font-size: var(--font-body);
 		font-weight: bold;
 		line-height: 1.25;
+	}
+
+	.page > :is(h2, h3, h4, h5, h6):first-child {
+		margin-block-start: 0;
+	}
+
+	:is(h2, h3, h4, h5, h6) + p {
+		margin-block-start: 0;
 	}
 
 	img {
@@ -123,6 +136,7 @@
 	ul.question-list,
 	ul.exclaim-list {
 		list-style: none;
+		break-inside: avoid-column;
 
 		li::marker {
 			content: none;
@@ -227,7 +241,7 @@
 		border-radius: var(--border-radius);
 		border-spacing: 0;
 		inline-size: 100%;
-		margin-block: 2em;
+		margin-block: 0 2em;
 
 		thead {
 			display: none;
@@ -263,10 +277,6 @@
 	table.chaos-table {
 		border: var(--border-width) solid var(--agency-ink);
 		color: var(--agency-ink);
-		border-radius: var(--border-radius);
-		border-spacing: 0;
-		inline-size: 100%;
-		margin-block: 2em;
 
 		caption {
 			color: var(--agency-red);
@@ -340,7 +350,27 @@
 		display: block;
 		column-count: 2;
 		column-gap: 3em;
-		margin-block: 0.25in;
+		margin: 0 0 0.25in 0;
+	}
+
+	two-columns > *:first-child {
+		margin-block-start: 0;
+	}
+
+	two-colums > p {
+		break-inside: avoid-column;
+	}
+
+	one-column {
+		display: block;
+		inline-size: calc(50% - 0.25in);
+		margin-inline-end: 0.125in;
+		float: inline-start;
+	}
+
+	one-column + one-column {
+		float: inline-end;
+		margin-inline-start: 0.125in;
 	}
 
 	major-callout {
@@ -351,6 +381,7 @@
 			var(--border-radius);
 		padding: 0.5em 1em;
 		margin-block-start: calc(33pt + 1em);
+		break-inside: avoid-column;
 	}
 
 	major-callout::before {
@@ -415,6 +446,7 @@
 		border-radius: var(--border-radius);
 		padding: 1em 1em 0.5em 1em;
 		margin-block-start: calc(13pt + 1em);
+		break-inside: avoid-column;
 	}
 
 	minor-callout::before {
@@ -537,6 +569,7 @@
 
 	.mission-document .page {
 		width: 100%;
+		max-height: none;
 		min-height: auto;
 		box-shadow: none;
 		margin: 0;
