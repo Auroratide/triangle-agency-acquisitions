@@ -29,14 +29,24 @@ if (defaultImageRenderer) {
 }
 
 const createSpecialList =
-	(name: string, symbol: string) => (state: StateCore) => {
+	(
+		name: string,
+		symbols: string[],
+		bulletClasses: Record<string, string> = {},
+	) =>
+	(state: StateCore) => {
 		const { Token, tokens } = state
 
 		for (let i = 0; i < tokens.length; i++) {
 			if (tokens[i].type !== "inline") continue
 
 			const lines = tokens[i].content.split("\n")
-			if (!lines.every((line) => line.startsWith(`${symbol} `))) continue
+			if (
+				!lines.every((line) =>
+					symbols.some((sym) => line.startsWith(`${sym} `)),
+				)
+			)
+				continue
 
 			const replacement = []
 
@@ -44,12 +54,21 @@ const createSpecialList =
 			listOpen.attrSet("class", name)
 			replacement.push(listOpen)
 
-			for (const item of lines.map((l) => l.slice(3))) {
-				replacement.push(new Token("list_item_open", "li", 1))
+			for (const line of lines) {
+				const itemOpen = new Token("list_item_open", "li", 1)
+				const className = Object.entries(bulletClasses).find(([symbol]) =>
+					line.startsWith(`${symbol} `),
+				)?.[1]
+				if (className) {
+					itemOpen.attrSet("class", className)
+				}
+				replacement.push(itemOpen)
+
 				const inline = new Token("inline", "", 0)
-				inline.content = item
+				inline.content = line.slice(3)
 				inline.children = []
 				replacement.push(inline)
+
 				replacement.push(new Token("list_item_close", "li", -1))
 			}
 
@@ -64,12 +83,20 @@ const createSpecialList =
 md.core.ruler.before(
 	"inline",
 	"question-list",
-	createSpecialList("question-list", "?-"),
+	createSpecialList("question-list", ["?-"]),
 )
 md.core.ruler.before(
 	"inline",
 	"exclaim-list",
-	createSpecialList("exclaim-list", "!-"),
+	createSpecialList("exclaim-list", ["!-"]),
+)
+md.core.ruler.before(
+	"inline",
+	"commendation-list",
+	createSpecialList("commendation-list", ["++", "--"], {
+		"++": "commendations",
+		"--": "demerits",
+	}),
 )
 
 const STANDARD_CHAOS_POWERS = new Set([

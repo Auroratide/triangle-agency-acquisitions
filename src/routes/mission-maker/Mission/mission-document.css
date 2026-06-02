@@ -184,6 +184,36 @@
 		mask-image: url("/icons/e-person.svg");
 	}
 
+	ul.commendation-list {
+		list-style: none;
+		padding-inline-start: 2em;
+
+		li::marker {
+			all: unset;
+		}
+
+		li {
+			position: relative;
+		}
+
+		li::before {
+			content: "";
+			display: inline-block;
+			inline-size: 2em;
+			block-size: 2em;
+			position: absolute;
+			inset: 0.125em auto auto -2em;
+		}
+
+		li.commendations::before {
+			background: url("/icons/commendation.png") no-repeat center / contain;
+		}
+
+		li.demerits::before {
+			background: url("/icons/demerit.png") no-repeat center / contain;
+		}
+	}
+
 	/*  CHAOS TABLE
 	 *  ===================================================================== */
 	table.chaos-table {
@@ -335,7 +365,7 @@
 		);
 		border: var(--border-width) solid var(--primary-color);
 		position: absolute;
-		inset: -32pt auto auto -2.5pt;
+		inset: -31.5pt auto auto -2.1pt;
 	}
 
 	major-callout[type="requisition"] {
