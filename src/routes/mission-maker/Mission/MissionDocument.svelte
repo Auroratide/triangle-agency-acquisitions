@@ -3,6 +3,7 @@
 
 	import "./mission-document.css"
 	import { renderToPages } from "../markdown.ts"
+	import LicenseAndCredits from "./LicenseAndCredits.svelte"
 	import { scalePages } from "./scale-pages"
 
 	let {
@@ -23,5 +24,6 @@
 	use:scalePages
 	style="--primary-color: {theme.primary || MissionTheme.DEFAULT.primary}; --secondary-color: {theme.secondary || MissionTheme.DEFAULT.secondary}"
 >
+	<LicenseAndCredits />
 	{@html renderedHtml}
 </div>
