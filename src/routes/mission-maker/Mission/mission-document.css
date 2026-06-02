@@ -22,11 +22,11 @@
 		aspect-ratio: 8.5 / 11;
 		/* min-height: 11in; */
 		padding: 0.75in;
-		background: var(--color-bg);
+		background: var(--bg);
 		box-shadow: 0 2px 12px oklch(0 0 0 / 0.25);
 		margin: 0 auto 2rem;
 		box-sizing: border-box;
-		color: var(--color-text);
+		color: var(--text);
 		font-size: var(--font-body);
 		line-height: 1.33;
 		counter-increment: page-number 1;
@@ -48,7 +48,7 @@
 	.page::after {
 		content: counter(page-number, decimal);
 		position: absolute;
-		color: var(--color-bg);
+		color: var(--bg);
 		background: var(--secondary-color);
 		font-size: var(--font-xl);
 		display: inline-block;
@@ -70,7 +70,7 @@
 	/*  HEADINGS
 	 *  ===================================================================== */
 	h1 {
-		color: var(--color-bg);
+		color: var(--bg);
 		background: var(--primary-color);
 		display: inline-block;
 		text-transform: uppercase;
@@ -92,7 +92,7 @@
 	}
 
 	h4 {
-		color: var(--color-text);
+		color: var(--text);
 		font-size: var(--font-body);
 		font-weight: bold;
 		line-height: 1.25;
@@ -146,7 +146,7 @@
 			block-size: 1.25em;
 			border: 0.375em solid var(--primary-color);
 			border-radius: 1em;
-			background: var(--color-bg);
+			background: var(--bg);
 			margin: 0;
 			padding: 0;
 			position: absolute;
@@ -162,8 +162,6 @@
 			color: var(--primary-color);
 			border: none;
 			background: var(--primary-color);
-			-webkit-mask-image: url("/icons/q-person.svg");
-			mask-image: url("/icons/q-person.svg");
 			-webkit-mask-size: contain;
 			mask-size: contain;
 			-webkit-mask-repeat: no-repeat;
@@ -176,13 +174,19 @@
 	}
 
 	ul.question-list li:first-child::before {
-		-webkit-mask-image: url("/icons/q-person.svg");
-		mask-image: url("/icons/q-person.svg");
+		inline-size: 2.125em;
+		block-size: 2.125em;
+		inset-inline-start: -1.25em;
+		-webkit-mask-image: url("/icons/agent-question.svg");
+		mask-image: url("/icons/agent-question.svg");
 	}
 
 	ul.exclaim-list li:first-child::before {
-		-webkit-mask-image: url("/icons/e-person.svg");
-		mask-image: url("/icons/e-person.svg");
+		inline-size: 3em;
+		block-size: 3em;
+		inset-inline-start: -1.7em;
+		-webkit-mask-image: url("/icons/agent-personal-anomaly.svg");
+		mask-image: url("/icons/agent-personal-anomaly.svg");
 	}
 
 	ul.commendation-list {
@@ -207,19 +211,19 @@
 		}
 
 		li.commendations::before {
-			background: url("/icons/commendation.png") no-repeat center / contain;
+			background: url("/icons/commendation.svg") no-repeat center / contain;
 		}
 
 		li.demerits::before {
-			background: url("/icons/demerit.png") no-repeat center / contain;
+			background: url("/icons/demerit.svg") no-repeat center / contain;
 		}
 	}
 
 	/*  GENERAL TABLES
 	 *  ===================================================================== */
 	table {
-		border: var(--border-width) solid var(--color-anomaly-d);
-		color: var(--color-anomaly-d);
+		border: var(--border-width) solid var(--agency-ink);
+		color: var(--agency-ink);
 		border-radius: var(--border-radius);
 		border-spacing: 0;
 		inline-size: 100%;
@@ -235,8 +239,7 @@
 
 		td {
 			padding: 10pt;
-			border-inline-end: calc(var(--border-width) - 1pt) solid
-				var(--color-anomaly-d);
+			border-inline-end: calc(var(--border-width) - 1pt) solid var(--agency-ink);
 		}
 
 		td:last-child {
@@ -251,22 +254,22 @@
 		}
 
 		tr:nth-child(even) td {
-			background: var(--color-anomaly-l);
+			background: var(--agency-gray);
 		}
 	}
 
 	/*  CHAOS TABLE
 	 *  ===================================================================== */
 	table.chaos-table {
-		border: var(--border-width) solid var(--color-anomaly-d);
-		color: var(--color-anomaly-d);
+		border: var(--border-width) solid var(--agency-ink);
+		color: var(--agency-ink);
 		border-radius: var(--border-radius);
 		border-spacing: 0;
 		inline-size: 100%;
 		margin-block: 2em;
 
 		caption {
-			color: var(--color-competency);
+			color: var(--agency-red);
 			text-align: start;
 			font-size: 90%;
 			display: none;
@@ -296,7 +299,7 @@
 
 		td:nth-child(1)::after {
 			content: "";
-			background-image: url("/icons/chaos.png");
+			background-image: url("/icons/chaos.svg");
 			background-size: contain;
 			background-repeat: no-repeat;
 			display: inline-block;
@@ -319,7 +322,7 @@
 
 		tr.new-effect td:nth-child(1)::before {
 			content: "▲";
-			color: var(--color-competency);
+			color: var(--agency-red);
 			font-size: var(--font-sm);
 			inline-size: 1em;
 			block-size: 100%;
@@ -354,7 +357,7 @@
 		content: attr(title);
 		display: inline-block;
 		background: var(--primary-color);
-		color: var(--color-bg);
+		color: var(--bg);
 		font-weight: bold;
 		font-size: var(--font-lg);
 		padding: 0.125em 2em 0.125em 0.375em;
@@ -388,21 +391,21 @@
 	}
 
 	major-callout[type="requisition"] {
-		border-color: var(--color-competency);
+		border-color: var(--agency-red);
 	}
 
 	major-callout[type="requisition"]::before {
-		border-color: var(--color-competency);
-		background-color: var(--color-competency);
+		border-color: var(--agency-red);
+		background-color: var(--agency-red);
 	}
 
 	major-callout[type="anomaly"] {
-		border-color: var(--color-anomaly);
+		border-color: var(--anomaly-blue);
 	}
 
 	major-callout[type="anomaly"]::before {
-		border-color: var(--color-anomaly);
-		background-color: var(--color-anomaly);
+		border-color: var(--anomaly-blue);
+		background-color: var(--anomaly-blue);
 	}
 
 	minor-callout {
@@ -418,7 +421,7 @@
 		content: attr(title);
 		display: inline-block;
 		color: var(--primary-color);
-		background: var(--color-bg);
+		background: var(--bg);
 		font-weight: bold;
 		font-size: var(--font-lg);
 		position: absolute;
@@ -433,10 +436,10 @@
 		gap: 0.1em;
 		font-size: var(--font-xl);
 		font-weight: bold;
-		color: var(--color-competency);
+		color: var(--agency-red);
 		padding: 0.25em;
 		line-height: 1;
-		border: var(--border-width) solid var(--color-competency);
+		border: var(--border-width) solid var(--agency-red);
 		border-radius: var(--border-radius);
 		float: inline-end;
 		margin: 0 0 0.5em 0.5em;
@@ -447,8 +450,9 @@
 		display: inline-block;
 		inline-size: 0.95em;
 		block-size: 0.95em;
-		background: url("/icons/commendation.png") no-repeat center / contain;
-		filter: brightness(2.55) hue-rotate(90deg);
+		background: var(--agency-red);
+		-webkit-mask: url("/icons/commendation.svg") no-repeat center / contain;
+		mask: url("/icons/commendation.svg") no-repeat center / contain;
 	}
 
 	on-success,
@@ -473,21 +477,21 @@
 	}
 
 	on-success::before {
-		background: var(--color-anomaly);
-		-webkit-mask-image: url("/icons/success.svg");
-		mask-image: url("/icons/success.svg");
+		background: var(--anomaly-blue);
+		-webkit-mask-image: url("/icons/ability-success.svg");
+		mask-image: url("/icons/ability-success.svg");
 	}
 
 	on-special::before {
-		background: var(--color-anomaly);
-		-webkit-mask-image: url("/icons/special.svg");
-		mask-image: url("/icons/special.svg");
+		background: var(--anomaly-blue);
+		-webkit-mask-image: url("/icons/ability-additional-outcome.svg");
+		mask-image: url("/icons/ability-additional-outcome.svg");
 	}
 
 	on-failure::before {
-		background: var(--color-competency);
-		-webkit-mask-image: url("/icons/failure.svg");
-		mask-image: url("/icons/failure.svg");
+		background: var(--agency-red);
+		-webkit-mask-image: url("/icons/ability-failure.svg");
+		mask-image: url("/icons/ability-failure.svg");
 	}
 
 	:is(on-success, on-special, on-failure) ul {
@@ -500,7 +504,7 @@
 		}
 
 		li {
-			border-inline-start: 0.375em solid var(--color-anomaly);
+			border-inline-start: 0.375em solid var(--anomaly-blue);
 			margin: 0;
 			padding: 0.25em 0 0.75em 1.375em;
 			position: relative;
@@ -511,9 +515,9 @@
 			display: block;
 			inline-size: 1.25em;
 			block-size: 1.25em;
-			border: 0.375em solid var(--color-anomaly);
+			border: 0.375em solid var(--anomaly-blue);
 			border-radius: 1em;
-			background: var(--color-bg);
+			background: var(--bg);
 			margin: 0;
 			padding: 0;
 			position: absolute;
