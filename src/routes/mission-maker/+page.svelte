@@ -140,9 +140,18 @@
 		<div class="preview-panel">
 			<MissionDocument
 				theme={{
-				primary: meta.primaryColor,
-				secondary: meta.secondaryColor,
-			}}
+					primary: meta.primaryColor,
+					secondary: meta.secondaryColor,
+				}}
+				metadata={{
+					title: meta.title,
+					subtitle: meta.subtitle,
+					author: "Auroratide (auroratide.com)",
+					artist: "",
+					version: "1.0",
+					updated: new Date(),
+					contentWarnings: "gore, blood",
+				}}
 				content={editorContent}
 				images={imageMap}
 			/>

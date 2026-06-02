@@ -1,5 +1,20 @@
 <script lang="ts">
 	import CompatibilityLogo from "./compatibility-logo.svg"
+	import type { MissionMetadata } from "./MissionMetadata"
+
+	let {
+		metadata,
+	}: {
+		metadata: MissionMetadata
+	} = $props()
+
+	const formatter = new Intl.DateTimeFormat("en-GB", {
+		day: "2-digit",
+		month: "short",
+		year: "numeric",
+	})
+
+	let dateUpdated = $derived(formatter.format(metadata.updated))
 </script>
 
 <section class="page license">
@@ -8,23 +23,27 @@
 		alt="Agency Compatible"
 		src="{CompatibilityLogo}"
 	>
-	<p class="main-title"><strong>[Document Title]</strong>: [Subtitle]</p>
-	<p class="version">Version: #.#</p>
-	<p class="date">Last updated 02 Jun 2026</p>
+	<p class="main-title">
+		<strong>{metadata.title}</strong>: {metadata.subtitle}
+	</p>
+	<p class="version">Version: {metadata.version}</p>
+	<p class="date">Last updated {dateUpdated}</p>
+	<p class="content-warnings">Content Warnings: {metadata.contentWarnings}</p>
 	<hr class="page-space">
 	<p>
-		<strong
-			>[Product name] is an independent production by [author or publisher] and
-			is not affiliated with Triangle Agency or Haunted Table, LLC. It is
-			published under the Triangle Agency Third Party License.</strong
+		<strong>
+			{metadata.title}
+			is an independent production by {metadata.author} and is not affiliated
+			with Triangle Agency or Haunted Table, LLC. It is published under the
+			Triangle Agency Third Party License.</strong
 		>
 	</p>
 	<p><strong>Triangle Agency is copyright Haunted Table, LLC.</strong></p>
 </section>
 <section class="page license">
 	<h3>Credits</h3>
-	<p><strong>Designer:</strong> [Designer]</p>
-	<p><strong>Artists:</strong> [artists]</p>
+	<p><strong>Writing:</strong> {metadata.author}</p>
+	<p><strong>Illustration:</strong> {metadata.artist}</p>
 	<hr class="small-space">
 	<p>
 		<strong>Triangle Agency Icons</strong>
@@ -86,7 +105,11 @@
 	}
 
 	.date {
-		margin-block: 0;
+		margin-block: 0 16pt;
+	}
+
+	.content-warnings {
+		font-style: italic;
 	}
 
 	.page.license {

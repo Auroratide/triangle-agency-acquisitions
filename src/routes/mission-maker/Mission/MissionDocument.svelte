@@ -4,14 +4,17 @@
 	import "./mission-document.css"
 	import { renderToPages } from "../markdown.ts"
 	import LicenseAndCredits from "./LicenseAndCredits.svelte"
+	import type { MissionMetadata } from "./MissionMetadata.ts"
 	import { scalePages } from "./scale-pages"
 
 	let {
 		theme,
+		metadata,
 		content,
 		images,
 	}: {
 		theme: MissionTheme
+		metadata: MissionMetadata
 		content: string
 		images: Map<string, string>
 	} = $props()
@@ -24,6 +27,6 @@
 	use:scalePages
 	style="--primary-color: {theme.primary || MissionTheme.DEFAULT.primary}; --secondary-color: {theme.secondary || MissionTheme.DEFAULT.secondary}"
 >
-	<LicenseAndCredits />
+	<LicenseAndCredits {metadata} />
 	{@html renderedHtml}
 </div>
