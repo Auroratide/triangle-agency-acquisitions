@@ -521,6 +521,6 @@
 
 	@page {
 		size: letter;
-		margin: 1in;
+		margin: 0;
 	}
 </style>
