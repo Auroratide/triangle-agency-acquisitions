@@ -424,6 +424,31 @@
 		inset: -13pt auto auto 1em;
 		padding: 0 0.5em;
 	}
+
+	commendation-cost {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.1em;
+		font-size: var(--font-xl);
+		font-weight: bold;
+		color: var(--color-competency);
+		padding: 0.25em;
+		line-height: 1;
+		border: var(--border-width) solid var(--color-competency);
+		border-radius: var(--border-radius);
+		float: inline-end;
+		margin: 0 0 0.5em 0.5em;
+	}
+
+	commendation-cost::after {
+		content: "";
+		display: inline-block;
+		inline-size: 0.95em;
+		block-size: 0.95em;
+		background: url("/icons/commendation.png") no-repeat center / contain;
+		filter: brightness(2.55) hue-rotate(90deg);
+	}
 }
 
 @media print {
