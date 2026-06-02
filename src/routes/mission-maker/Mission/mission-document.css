@@ -449,6 +449,80 @@
 		background: url("/icons/commendation.png") no-repeat center / contain;
 		filter: brightness(2.55) hue-rotate(90deg);
 	}
+
+	on-success,
+	on-special,
+	on-failure {
+		display: block;
+		position: relative;
+		padding: 0 0 0 2.5em;
+	}
+
+	:is(on-success, on-special, on-failure)::before {
+		content: "";
+		display: block;
+		inline-size: 1.75em;
+		block-size: 1.75em;
+		-webkit-mask-size: contain;
+		mask-size: contain;
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+		position: absolute;
+		inset: 0 auto auto 0;
+	}
+
+	on-success::before {
+		background: var(--color-anomaly);
+		-webkit-mask-image: url("/icons/success.svg");
+		mask-image: url("/icons/success.svg");
+	}
+
+	on-special::before {
+		background: var(--color-anomaly);
+		-webkit-mask-image: url("/icons/special.svg");
+		mask-image: url("/icons/special.svg");
+	}
+
+	on-failure::before {
+		background: var(--color-competency);
+		-webkit-mask-image: url("/icons/failure.svg");
+		mask-image: url("/icons/failure.svg");
+	}
+
+	:is(on-success, on-special, on-failure) ul {
+		list-style: none;
+		padding: 0;
+		margin-inline-start: -1.75em;
+
+		li::marker {
+			content: none;
+		}
+
+		li {
+			border-inline-start: 0.375em solid var(--color-anomaly);
+			margin: 0;
+			padding: 0.25em 0 0.75em 1.375em;
+			position: relative;
+		}
+
+		li::before {
+			content: "";
+			display: block;
+			inline-size: 1.25em;
+			block-size: 1.25em;
+			border: 0.375em solid var(--color-anomaly);
+			border-radius: 1em;
+			background: var(--color-bg);
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			inset: 0.25em auto auto -0.8em;
+		}
+
+		li:last-child {
+			padding-bottom: 0;
+		}
+	}
 }
 
 @media print {
