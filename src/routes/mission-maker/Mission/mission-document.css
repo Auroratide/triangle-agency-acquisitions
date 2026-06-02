@@ -87,6 +87,7 @@
 		color: var(--secondary-color);
 		margin: 0;
 		font-size: calc(var(--font-lg) + 1pt);
+		line-height: 1.25;
 	}
 
 	img {
