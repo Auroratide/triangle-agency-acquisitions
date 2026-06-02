@@ -153,7 +153,7 @@ const defaultTableOpen =
 md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
 	const tag = defaultTableOpen(tokens, idx, options, env, self)
 	return tokens[idx].attrGet("class") === "chaos-table"
-		? `${tag}<caption>▲ <i>Introduced in this mission</i></caption>\n`
+		? `${tag}<caption><i>▲</i> Introduced in this mission</caption>\n`
 		: tag
 }
 

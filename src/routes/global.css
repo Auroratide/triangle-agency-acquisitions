@@ -1,3 +1,11 @@
+:root {
+	--color-bg: oklch(1 0 0);
+	--color-text: oklch(0.22 0 0);
+	--color-competency: oklch(0.54 0.221 26.9);
+	--color-anomaly-d: oklch(0.23 0.137 273.4);
+	--color-anomaly-l: oklch(0.94 0.0121 281.1);
+}
+
 *,
 *::before,
 *::after {

@@ -1,4 +1,13 @@
 .mission-document {
+	--font-body: 10pt;
+	--font-heading: 30pt;
+	--font-sm: 8pt;
+	--font-md: 13pt;
+	--font-lg: 16pt;
+	--font-xl: 24pt;
+	--border-width: 2.5pt;
+	--border-radius: 12.5pt;
+
 	padding: 2rem;
 	min-height: 100%;
 	box-sizing: border-box;
@@ -12,54 +21,45 @@
 		width: 8.5in;
 		min-height: 11in;
 		padding: 0.75in;
-		background: white;
-		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+		background: var(--color-bg);
+		box-shadow: 0 2px 12px oklch(0 0 0 / 0.25);
 		margin: 0 auto 2rem;
 		box-sizing: border-box;
-		color: #1a1a1a;
-		font-size: 10pt;
+		color: var(--color-text);
+		font-size: var(--font-body);
 		line-height: 1.33;
 		counter-increment: page-number 1;
 	}
 
+	.page::before {
+		content: "";
+		position: absolute;
+		inline-size: 0.25in;
+		background: var(--primary-color);
+	}
 	.page:nth-child(odd)::before {
-		content: "";
-		position: absolute;
 		inset: 0 auto 0 0;
-		inline-size: 0.25in;
-		background: var(--primary-color);
 	}
-
-	.page:nth-child(odd)::after {
-		content: counter(page-number, decimal);
-		position: absolute;
-		inset: auto auto 0.25in 0;
-		color: white;
-		background: var(--secondary-color);
-		font-size: 14pt;
-		display: inline-block;
-		padding: 0.125em 0.25em 0.125em calc(0.25in + 0.125em);
-		font-weight: bold;
-	}
-
 	.page:nth-child(even)::before {
-		content: "";
-		position: absolute;
 		inset: 0 0 0 auto;
-		inline-size: 0.25in;
-		background: var(--primary-color);
 	}
 
-	.page:nth-child(even)::after {
+	.page::after {
 		content: counter(page-number, decimal);
 		position: absolute;
-		inset: auto 0 0.25in auto;
-		color: white;
+		color: var(--color-bg);
 		background: var(--secondary-color);
-		font-size: 14pt;
+		font-size: var(--font-xl);
 		display: inline-block;
-		padding: 0.125em calc(0.25in + 0.125em) 0.125em 0.25em;
 		font-weight: bold;
+	}
+	.page:nth-child(odd)::after {
+		inset: auto auto 0.25in 0;
+		padding: 0.125em 0.25em 0.125em calc(0.25in + 0.125em);
+	}
+	.page:nth-child(even)::after {
+		inset: auto 0 0.25in auto;
+		padding: 0.125em calc(0.25in + 0.125em) 0.125em 0.25em;
 	}
 
 	.page:last-child {
@@ -69,24 +69,24 @@
 	/*  HEADINGS
 	 *  ===================================================================== */
 	h1 {
-		color: white;
+		color: var(--color-bg);
 		background: var(--primary-color);
 		display: inline-block;
 		text-transform: uppercase;
 		padding: 0.0625em 0.25em;
 		margin: 0;
-		font-size: 30pt;
+		font-size: var(--font-heading);
 	}
 
 	h2 {
 		color: var(--primary-color);
-		font-size: 30pt;
+		font-size: var(--font-heading);
 	}
 
 	h3 {
 		color: var(--secondary-color);
 		margin: 0;
-		font-size: 17pt;
+		font-size: calc(var(--font-lg) + 1pt);
 	}
 
 	img {
@@ -108,7 +108,7 @@
 		content: "▶";
 		display: inline-block;
 		color: var(--primary-color);
-		font-size: 8pt;
+		font-size: var(--font-sm);
 	}
 
 	ul.question-list,
@@ -137,7 +137,7 @@
 			block-size: 1.25em;
 			border: 0.375em solid var(--primary-color);
 			border-radius: 1em;
-			background: white;
+			background: var(--color-bg);
 			margin: 0;
 			padding: 0;
 			position: absolute;
@@ -179,38 +179,44 @@
 	/*  CHAOS TABLE
 	 *  ===================================================================== */
 	table.chaos-table {
-		border: 2.5pt solid #10045a;
-		color: #10045a;
-		border-radius: 10pt;
+		border: var(--border-width) solid var(--color-anomaly-d);
+		color: var(--color-anomaly-d);
+		border-radius: var(--border-radius);
 		border-spacing: 0;
 		inline-size: 100%;
 		margin-block: 2em;
 
 		caption {
-			color: red;
+			color: var(--color-competency);
 			text-align: start;
-			font-size: 9pt;
+			font-size: 90%;
 			display: none;
+			padding: 0.375em 0;
+			font-style: italic;
+
+			i {
+				display: inline-block;
+				font-size: var(--font-sm);
+				font-style: normal;
+				margin-inline-end: 0.5em;
+			}
 		}
 
 		&:has(.new-effect) caption {
 			display: table-caption;
 		}
-
 		thead {
 			display: none;
 		}
-
 		tr {
 			position: relative;
 		}
-
 		td {
 			padding: 10pt;
 		}
 
 		td:nth-child(1) {
-			font-size: 24pt;
+			font-size: var(--font-xl);
 			font-weight: bold;
 			text-align: center;
 			line-height: 1;
@@ -230,19 +236,20 @@
 		}
 
 		td:nth-child(2) {
-			font-size: 13pt;
+			font-size: var(--font-md);
 			font-weight: bold;
 			text-align: center;
-			border-inline: 1.5pt solid #10045a;
+			border-inline: calc(var(--border-width) - 1pt) solid
+				var(--color-anomaly-d);
 			line-height: 1;
 			inline-size: 7.5em;
 		}
 
 		tr:last-child td:nth-child(1) {
-			border-end-start-radius: 8pt;
+			border-end-start-radius: calc(var(--border-radius) - 2pt);
 		}
 		tr:last-child td:nth-child(3) {
-			border-end-end-radius: 8pt;
+			border-end-end-radius: calc(var(--border-radius) - 2pt);
 		}
 
 		tr.new-effect td:nth-child(2) {
@@ -251,8 +258,8 @@
 
 		tr.new-effect td:nth-child(1)::before {
 			content: "▲";
-			color: red;
-			font-size: 8pt;
+			color: var(--color-competency);
+			font-size: var(--font-sm);
 			inline-size: 1em;
 			block-size: 100%;
 			position: absolute;
@@ -263,7 +270,7 @@
 		}
 
 		tr:nth-child(even) td {
-			background: #eaebf4;
+			background: var(--color-anomaly-l);
 		}
 	}
 
@@ -280,7 +287,8 @@
 		display: block;
 		position: relative;
 		border: 0.25em solid var(--primary-color);
-		border-radius: 0 12pt 12pt 12pt;
+		border-radius: 0 var(--border-radius) var(--border-radius)
+			var(--border-radius);
 		padding: 0.5em 1em;
 		margin-block-start: calc(33pt + 1em);
 	}
@@ -289,11 +297,11 @@
 		content: attr(title);
 		display: inline-block;
 		background: var(--primary-color);
-		color: white;
+		color: var(--color-bg);
 		font-weight: bold;
-		font-size: 16pt;
+		font-size: var(--font-lg);
 		padding: 0.125em 2em 0.125em 0.375em;
-		border-start-start-radius: 12pt;
+		border-start-start-radius: var(--border-radius);
 		/* clip-path: polygon(0 0, calc(100% - 2.5em) 0, calc(100% - 1.5em) 0.5em, 100% 100%, 0 100%); */
 		clip-path: polygon(
 			0 0,
@@ -317,16 +325,16 @@
 			100% 100%,
 			0 100%
 		);
-		border: 0.25em solid var(--primary-color);
+		border: var(--border-width) solid var(--primary-color);
 		position: absolute;
-		inset: -33pt auto auto -2.5pt;
+		inset: -32pt auto auto -2.5pt;
 	}
 
 	minor-callout {
 		display: block;
 		position: relative;
-		border: 0.25em solid var(--primary-color);
-		border-radius: 12pt;
+		border: var(--border-width) solid var(--primary-color);
+		border-radius: var(--border-radius);
 		padding: 1em 1em 0.5em 1em;
 		margin-block-start: calc(13pt + 1em);
 	}
@@ -335,9 +343,9 @@
 		content: attr(title);
 		display: inline-block;
 		color: var(--primary-color);
-		background: white;
+		background: var(--color-bg);
 		font-weight: bold;
-		font-size: 16pt;
+		font-size: var(--font-lg);
 		position: absolute;
 		inset: -13pt auto auto 1em;
 		padding: 0 0.5em;
