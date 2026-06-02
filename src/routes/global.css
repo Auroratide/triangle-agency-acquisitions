@@ -16,4 +16,21 @@
 
 body {
 	font-family: "Poppins", sans-serif;
+	background: var(--agency-gray);
+	color: var(--text);
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	color: var(--agency-red);
+}
+
+a:focus-visible {
+	outline: 0.25em solid var(--reality-yellow);
+}
+
+a:hover,
+a:focus {
+	text-decoration: none;
 }
