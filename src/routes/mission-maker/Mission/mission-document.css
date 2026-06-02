@@ -198,6 +198,73 @@
 	chaos-row::before {
 		content: attr(amount) " " attr(name);
 	}
+
+	major-callout {
+		display: block;
+		position: relative;
+		border: 0.25em solid var(--primary-color);
+		border-radius: 0 12pt 12pt 12pt;
+		padding: 0.5em 1em;
+		margin-block-start: calc(33pt + 1em);
+	}
+
+	major-callout::before {
+		content: attr(title);
+		display: inline-block;
+		background: var(--primary-color);
+		color: white;
+		font-weight: bold;
+		font-size: 16pt;
+		padding: 0.125em 2em 0.125em 0.375em;
+		border-start-start-radius: 12pt;
+		/* clip-path: polygon(0 0, calc(100% - 2.5em) 0, calc(100% - 1.5em) 0.5em, 100% 100%, 0 100%); */
+		clip-path: polygon(
+			0 0,
+			calc(100% + -2.5em) 0,
+			calc(100% + -2.4132em) 0.0181em,
+			calc(100% + -2.3297em) 0.0379em,
+			calc(100% + -2.2494em) 0.0595em,
+			calc(100% + -2.1724em) 0.0828em,
+			calc(100% + -2.0986em) 0.1079em,
+			calc(100% + -2.028em) 0.1348em,
+			calc(100% + -1.9606em) 0.1634em,
+			calc(100% + -1.8965em) 0.1938em,
+			calc(100% + -1.8356em) 0.2259em,
+			calc(100% + -1.778em) 0.2598em,
+			calc(100% + -1.7236em) 0.2954em,
+			calc(100% + -1.6724em) 0.3328em,
+			calc(100% + -1.6244em) 0.372em,
+			calc(100% + -1.5797em) 0.4129em,
+			calc(100% + -1.5382em) 0.4556em,
+			calc(100% + -1.5em) 0.5em,
+			100% 100%,
+			0 100%
+		);
+		border: 0.25em solid var(--primary-color);
+		position: absolute;
+		inset: -33pt auto auto -2.5pt;
+	}
+
+	minor-callout {
+		display: block;
+		position: relative;
+		border: 0.25em solid var(--primary-color);
+		border-radius: 12pt;
+		padding: 1em 1em 0.5em 1em;
+		margin-block-start: calc(13pt + 1em);
+	}
+
+	minor-callout::before {
+		content: attr(title);
+		display: inline-block;
+		color: var(--primary-color);
+		background: white;
+		font-weight: bold;
+		font-size: 16pt;
+		position: absolute;
+		inset: -13pt auto auto 1em;
+		padding: 0 0.5em;
+	}
 }
 
 @media print {
