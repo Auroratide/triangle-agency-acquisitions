@@ -6,6 +6,7 @@
 	import LicenseAndCredits from "./LicenseAndCredits.svelte"
 	import type { MissionMetadata } from "./MissionMetadata.ts"
 	import { scalePages } from "./scale-pages"
+	import TitlePage from "./TitlePage.svelte"
 
 	let {
 		theme,
@@ -27,6 +28,7 @@
 	use:scalePages
 	style="--primary-color: {theme.primary || MissionTheme.DEFAULT.primary}; --secondary-color: {theme.secondary || MissionTheme.DEFAULT.secondary}"
 >
+	<TitlePage {metadata} />
 	<LicenseAndCredits {metadata} />
 	{@html renderedHtml}
 </div>

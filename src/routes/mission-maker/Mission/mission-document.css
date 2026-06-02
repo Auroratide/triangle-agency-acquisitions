@@ -38,10 +38,10 @@
 		inline-size: 0.25in;
 		background: var(--primary-color);
 	}
-	.page:nth-child(odd)::before {
+	.page:nth-child(even)::before {
 		inset: 0 auto 0 0;
 	}
-	.page:nth-child(even)::before {
+	.page:nth-child(odd)::before {
 		inset: 0 0 0 auto;
 	}
 
@@ -54,11 +54,11 @@
 		display: inline-block;
 		font-weight: bold;
 	}
-	.page:nth-child(odd)::after {
+	.page:nth-child(even)::after {
 		inset: auto auto 0.25in 0;
 		padding: 0.125em 0.375em 0.125em calc(0.25in + 0.25em);
 	}
-	.page:nth-child(even)::after {
+	.page:nth-child(odd)::after {
 		inset: auto 0 0.25in auto;
 		padding: 0.125em calc(0.25in + 0.25em) 0.125em 0.375em;
 	}

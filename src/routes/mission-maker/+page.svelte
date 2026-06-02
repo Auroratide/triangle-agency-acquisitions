@@ -146,7 +146,7 @@
 				metadata={{
 					title: meta.title,
 					subtitle: meta.subtitle,
-					author: "Auroratide (auroratide.com)",
+					author: "Auroratide",
 					artist: "",
 					version: "1.0",
 					updated: new Date(),
