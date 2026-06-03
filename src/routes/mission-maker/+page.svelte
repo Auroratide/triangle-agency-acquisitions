@@ -4,9 +4,9 @@
 
 <script lang="ts">
 	import { onMount } from "svelte"
+	import { Markdown } from "./Markdown/index.ts"
 	import { DEFAULT_META, Metadata, MetadataDrawer } from "./Metadata"
 	import { MissionDocument } from "./Mission/index.ts"
-	import { extractImageKeys } from "./markdown.ts"
 	import {
 		deleteImage,
 		getAllImageKeys,
@@ -33,7 +33,7 @@
 			metadata = loadedMeta
 			editorContent = content
 		}
-		imageMap = await resolveImages(extractImageKeys(editorContent))
+		imageMap = await resolveImages(Markdown.extractImageKeys(editorContent))
 		loaded = true
 	})
 
@@ -55,7 +55,7 @@
 		if (!loaded) return
 		const content = editorContent
 		const timer = setTimeout(async () => {
-			const keys = extractImageKeys(content)
+			const keys = Markdown.extractImageKeys(content)
 			await purgeOrphanedImages(keys)
 			imageMap = await resolveImages(keys)
 		}, 200)
@@ -126,9 +126,9 @@
 
 <div class="app">
 	<Toolbar>
-		<ToolButton onclick={togglePreview}
-			>{previewOnly ? "Show Editor" : "Preview Only"}</ToolButton
-		>
+		<ToolButton onclick={togglePreview}>
+			{previewOnly ? "Show Editor" : "Preview Only"}
+		</ToolButton>
 		<ToolButton onclick={printPreview}>Print/PDF</ToolButton>
 		<ToolButton onclick={toggleMetadata}>Edit Metadata</ToolButton>
 	</Toolbar>

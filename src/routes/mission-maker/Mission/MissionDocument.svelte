@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { MissionTheme } from "./MissionTheme.js"
-
 	import "./mission-document.css"
-	import { renderToPages } from "../markdown.ts"
+	import { Markdown } from "../Markdown/index.ts"
 	import LicenseAndCredits from "./LicenseAndCredits.svelte"
 	import type { MissionMetadata } from "./MissionMetadata.ts"
+	import { MissionTheme } from "./MissionTheme.js"
 	import { scalePages } from "./scale-pages"
 	import TitlePage from "./TitlePage.svelte"
 
@@ -18,7 +17,7 @@
 		images: Map<string, string>
 	} = $props()
 
-	let renderedHtml = $derived(renderToPages(content, images))
+	let renderedHtml = $derived(Markdown.renderToPages(content, images))
 </script>
 
 <div
