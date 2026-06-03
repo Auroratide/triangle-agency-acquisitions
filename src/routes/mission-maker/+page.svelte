@@ -20,6 +20,7 @@
 		saveDocument,
 		saveImage,
 	} from "./storage.ts"
+	import { ToolButton, Toolbar } from "./Toolbar"
 
 	let editorContent = $state("")
 	let meta = $state<DocumentMeta>({ ...DEFAULT_META })
@@ -113,6 +114,14 @@
 			}
 		}
 	}
+
+	function togglePreview() {
+		previewOnly = !previewOnly
+	}
+
+	function toggleMetadata() {
+		showMetadata = !showMetadata
+	}
 </script>
 
 <svelte:head>
@@ -120,21 +129,12 @@
 </svelte:head>
 
 <div class="app">
-	<div class="toolbar">
-		<span class="app-title">Mission Maker</span>
-		<div class="toolbar-actions">
-			<button type="button" onclick={() => (previewOnly = !previewOnly)}>
-				{previewOnly ? "Show Editor" : "Preview Only"}
-			</button>
-			<button
-				type="button"
-				onclick={() => (showMetadata = !showMetadata)}
-				class:active={showMetadata}
-			>
-				Metadata
-			</button>
-		</div>
-	</div>
+	<Toolbar>
+		<ToolButton onclick={togglePreview}
+			>{previewOnly ? "Show Editor" : "Preview Only"}</ToolButton
+		>
+		<ToolButton onclick={toggleMetadata}>Edit Metadata</ToolButton>
+	</Toolbar>
 
 	<div class="workspace" class:preview-only={previewOnly}>
 		<div class="preview-panel">
@@ -230,67 +230,12 @@
 </div>
 
 <style>
-	:global(body) {
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-	}
-
 	.app {
 		display: flex;
 		flex-direction: column;
 		height: 100vh;
 		overflow: hidden;
 		background: #f0f0f0;
-	}
-
-	/* ── Toolbar ──────────────────────────────────── */
-
-	.toolbar {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 0.5rem 1rem;
-		background: #1a1a2e;
-		color: white;
-		flex-shrink: 0;
-		gap: 1rem;
-		z-index: 10;
-	}
-
-	.app-title {
-		font-weight: 600;
-		font-size: 0.85rem;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		opacity: 0.9;
-	}
-
-	.toolbar-actions {
-		display: flex;
-		gap: 0.5rem;
-	}
-
-	.toolbar button {
-		padding: 0.35rem 0.8rem;
-		background: rgba(255, 255, 255, 0.08);
-		color: white;
-		border: 1px solid rgba(255, 255, 255, 0.2);
-		border-radius: 4px;
-		cursor: pointer;
-		font-size: 0.8rem;
-		transition:
-			background 0.15s,
-			border-color 0.15s;
-	}
-
-	.toolbar button:hover {
-		background: rgba(255, 255, 255, 0.18);
-	}
-
-	.toolbar button.active {
-		background: rgba(255, 255, 255, 0.22);
-		border-color: rgba(255, 255, 255, 0.5);
 	}
 
 	/* ── Workspace ────────────────────────────────── */
@@ -488,7 +433,6 @@
 			overflow: auto;
 		}
 
-		.toolbar,
 		.editor-panel,
 		.metadata-drawer,
 		.metadata-overlay {
