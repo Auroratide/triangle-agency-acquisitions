@@ -3,6 +3,7 @@ import type { ImageMap } from "./ImageMap"
 import { ChaosTable } from "./rules/ChaosTable"
 import { CustomList } from "./rules/CustomList"
 import { Icons } from "./rules/Icons"
+import { NumericCells } from "./rules/NumericCells"
 import { PageBreak } from "./rules/PageBreak"
 import { SavedImages } from "./rules/SavedImages"
 import { TableCaptions } from "./rules/TableCaptions"
@@ -42,6 +43,8 @@ md.core.ruler.before("inline", "chaos-table", ChaosTable())
 md.renderer.rules.table_open = TableCaptions(md, {
 	"chaos-table": "<i>▲</i> Introduced in this mission",
 })
+
+md.core.ruler.before("inline", "numeric-cell", NumericCells())
 
 md.inline.ruler.push("icon", Icons())
 

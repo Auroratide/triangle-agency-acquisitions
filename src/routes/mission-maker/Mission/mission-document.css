@@ -119,8 +119,8 @@
 
 	img.icon {
 		display: inline-block;
-		block-size: 1em;
-		vertical-align: middle;
+		block-size: 0.75em;
+		vertical-align: baseline;
 	}
 
 	/*  LISTS
@@ -288,6 +288,15 @@
 		td br + span.space {
 			display: block;
 			height: 0.875em;
+		}
+
+		td.numeric {
+			font-size: var(--font-xl);
+			font-weight: bold;
+			text-align: center;
+			line-height: 1;
+			letter-spacing: -0.125ch;
+			text-wrap: nowrap;
 		}
 	}
 
