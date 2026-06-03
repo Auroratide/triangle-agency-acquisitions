@@ -12,7 +12,12 @@
 	<nav>
 		<span class="tool-name">Mission Maker</span>
 		<span class="divider">▲</span>
-		<span class="site-title"><a href="/">Triangle Agency Acquisitions</a></span>
+		<span class="site-title"
+			><a href="/">
+				<span class="large-screens">Triangle Agency Acquisitions</span>
+				<span class="small-screens">Home</span>
+			</a></span
+		>
 	</nav>
 	<menu>
 		{@render children?.()}
@@ -51,6 +56,30 @@
 		display: flex;
 		gap: 0.5em;
 		margin: 0;
+	}
+
+	.small-screens {
+		display: none;
+	}
+
+	@media (max-width: 50rem) {
+		.toolbar {
+			flex-direction: column;
+			justify-content: center;
+			gap: 0.5em;
+		}
+
+		.small-screens {
+			display: inline;
+		}
+
+		.large-screens {
+			display: none;
+		}
+
+		menu {
+			font-size: 0.875em;
+		}
 	}
 
 	@media print {
