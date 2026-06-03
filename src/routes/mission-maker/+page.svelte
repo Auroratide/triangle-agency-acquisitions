@@ -3,6 +3,7 @@
 	import { Markdown } from "./Markdown/index.ts"
 	import { DEFAULT_META, Metadata, MetadataDrawer } from "./Metadata"
 	import { MissionDocument } from "./Mission/index.ts"
+	import { TemplateMission } from "./Mission/TemplateMission.ts"
 	import {
 		deleteImage,
 		getAllImageKeys,
@@ -26,6 +27,12 @@
 		const stored = await loadDocument()
 		if (stored) {
 			const { metadata: loadedMeta, content } = Metadata.parse(stored)
+			metadata = loadedMeta
+			editorContent = content
+		} else {
+			const { metadata: loadedMeta, content } = Metadata.parse(
+				TemplateMission(),
+			)
 			metadata = loadedMeta
 			editorContent = content
 		}

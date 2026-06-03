@@ -1,15 +1,19 @@
 ---
 title: Sample Mission
 subtitle: Getting Started
+updated: 2026-06-03T12:00:00.000Z
+author: 
+artist: 
+contentWarnings: 
 primaryColor: #983d99
 secondaryColor: #5c2aa7
 ---
 
 ## Anomaly Profile
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consectetur lectus et ipsum congue, in rhoncus tortor laoreet. Duis porttitor eros ac erat egestas ultricies. Suspendisse diam justo, tempus faucibus velit ac, ultrices condimentum tellus. Maecenas mattis, justo quis molestie convallis, arcu elit faucibus dui, in hendrerit dui ante mattis risus.
+Welcome to the Mission Maker! This tool lets you use Markdown to draft mission documents for Triangle Agency. The sample document here has a bunch of examples of things you would want in such a document, such as headings, a chaos table, commendation callouts, columnated formatting, and more.
 
-Maecenas imperdiet sem quis felis scelerisque placerat. Cras convallis mi lectus, eu ultricies ex ultricies quis. Phasellus egestas pellentesque placerat. Aliquam non luctus arcu.
+This is a work in progress, so more things might get added. A more in-detail instruction sheet will probably also exist at some point in the future.
 
 <two-columns>
 
@@ -87,7 +91,7 @@ Vivamus mollis lacinia lectus, vitae bibendum nisl fringilla nec. Fusce mollis p
 | ----- | ------- | -------- |
 | 2     | Corrupt | Use this table to describe unique chaos effects anomalies can invoke. |
 | 3     | Engulf | Custom chaos effects are automatically highlighted and marked with a triangle, indicating that they are unique to this mission and anomaly. |
-| 6     | Expand | **Formatting** is allowed inside of the table. However, in order to get multiple lines, you need to use a `<br />` tag, like indicated here. <br /> This is a separate paragraph for the same anomalous feature. |
+| 6     | Expand | **Formatting** is allowed inside of the table. However, in order to get multiple lines, you need to use three slashes `///`, like indicated here. /// This is a separate paragraph for the same anomalous feature. |
 | 10    | Kill | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consectetur lectus et ipsum congue, in rhoncus tortor laoreet. Duis porttitor eros ac erat egestas ultricies. Suspendisse diam justo, tempus faucibus velit ac, ultrices condimentum tellus. Maecenas mattis, justo quis molestie convallis, arcu elit faucibus dui, in hendrerit dui ante mattis risus. Cras gravida dictum orci ac congue. Praesent dictum ex laoreet vulputate auctor. Praesent aliquet tellus et nisi porta, gravida fringilla tellus pretium. |
 
 | Special Rules   | Description |
