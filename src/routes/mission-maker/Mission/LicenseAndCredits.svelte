@@ -26,7 +26,6 @@
 	<p class="main-title">
 		<strong>{metadata.title}</strong>: {metadata.subtitle}
 	</p>
-	<p class="version">Version: {metadata.version}</p>
 	<p class="date">Last updated {dateUpdated}</p>
 	<p class="content-warnings">Content Warnings: {metadata.contentWarnings}</p>
 	<hr class="page-space">
@@ -98,10 +97,6 @@
 		border: none;
 		background: none;
 		margin-block-end: 1in;
-	}
-
-	.version {
-		margin-block: 0;
 	}
 
 	.date {

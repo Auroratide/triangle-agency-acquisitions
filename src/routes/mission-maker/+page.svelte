@@ -10,6 +10,7 @@
 		parseFrontmatter,
 		serializeFrontmatter,
 	} from "./frontmatter.ts"
+	import { MetadataDrawer } from "./Metadata"
 	import { MissionDocument } from "./Mission/index.ts"
 	import { extractImageKeys } from "./markdown.ts"
 	import {
@@ -26,10 +27,10 @@
 	let meta = $state<DocumentMeta>({ ...DEFAULT_META })
 	let imageMap = $state(new Map<string, string>())
 	let previewOnly = $state(false)
-	let showMetadata = $state(false)
 	let loaded = $state(false)
 
 	let textarea: HTMLTextAreaElement | undefined = $state()
+	let dialog: HTMLDialogElement | undefined = $state()
 
 	onMount(async () => {
 		const stored = await loadDocument()
@@ -120,7 +121,7 @@
 	}
 
 	function toggleMetadata() {
-		showMetadata = !showMetadata
+		dialog?.showModal()
 	}
 
 	function printPreview() {
@@ -144,18 +145,15 @@
 	<div class="workspace" class:preview-only={previewOnly}>
 		<div class="preview-panel">
 			<MissionDocument
-				theme={{
-					primary: meta.primaryColor,
-					secondary: meta.secondaryColor,
-				}}
 				metadata={{
 					title: meta.title,
 					subtitle: meta.subtitle,
 					author: "Auroratide",
 					artist: "",
-					version: "1.0",
 					updated: new Date(),
 					contentWarnings: "gore, blood",
+					primaryColor: meta.primaryColor,
+					secondaryColor: meta.secondaryColor,
 				}}
 				content={editorContent}
 				images={imageMap}
@@ -173,65 +171,7 @@
 		</div>
 	</div>
 
-	{#if showMetadata}
-		<div
-			class="metadata-overlay"
-			role="button"
-			tabindex="-1"
-			aria-label="Close metadata panel"
-			onclick={() => (showMetadata = false)}
-			onkeydown={(e) => {
-				if (e.key === "Escape") {
-					showMetadata = false	
-				}
-			}}
-		></div>
-	{/if}
-
-	<aside
-		class="metadata-drawer"
-		class:open={showMetadata}
-		aria-label="Document metadata"
-	>
-		<div class="metadata-header">
-			<h2>Metadata</h2>
-			<button
-				type="button"
-				onclick={() => (showMetadata = false)}
-				aria-label="Close metadata panel"
-			>
-				✕
-			</button>
-		</div>
-		<div class="metadata-fields">
-			<label>
-				<span>Title</span>
-				<input type="text" bind:value={meta.title} placeholder="Mission title">
-			</label>
-			<label>
-				<span>Subtitle</span>
-				<input
-					type="text"
-					bind:value={meta.subtitle}
-					placeholder="Mission subtitle"
-				>
-			</label>
-			<label>
-				<span>Primary Color</span>
-				<div class="color-field">
-					<input type="color" bind:value={meta.primaryColor}>
-					<input type="text" bind:value={meta.primaryColor}>
-				</div>
-			</label>
-			<label>
-				<span>Secondary Color</span>
-				<div class="color-field">
-					<input type="color" bind:value={meta.secondaryColor}>
-					<input type="text" bind:value={meta.secondaryColor}>
-				</div>
-			</label>
-		</div>
-	</aside>
+	<MetadataDrawer bind:dialog bind:metadata={meta} />
 </div>
 
 <style>
@@ -314,123 +254,6 @@
 		}
 	}
 
-	/* ── Metadata drawer ──────────────────────────── */
-
-	.metadata-overlay {
-		position: fixed;
-		inset: 0;
-		background: rgba(0, 0, 0, 0.3);
-		z-index: 50;
-	}
-
-	.metadata-drawer {
-		position: fixed;
-		top: 0;
-		right: calc(-320px - 20px);
-		width: 320px;
-		height: 100vh;
-		background: white;
-		box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
-		transition: right 0.22s ease;
-		z-index: 100;
-		overflow-y: auto;
-		display: flex;
-		flex-direction: column;
-	}
-
-	.metadata-drawer.open {
-		right: 0;
-	}
-
-	.metadata-header {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 0.75rem 1rem;
-		border-bottom: 1px solid #eee;
-		flex-shrink: 0;
-	}
-
-	.metadata-header h2 {
-		margin: 0;
-		font-size: 0.9rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		color: #444;
-	}
-
-	.metadata-header button {
-		background: none;
-		border: none;
-		cursor: pointer;
-		font-size: 1rem;
-		padding: 0.25rem 0.4rem;
-		color: #888;
-		border-radius: 4px;
-	}
-
-	.metadata-header button:hover {
-		background: #f0f0f0;
-		color: #333;
-	}
-
-	.metadata-fields {
-		padding: 1rem;
-		display: flex;
-		flex-direction: column;
-		gap: 1.1rem;
-	}
-
-	.metadata-fields label {
-		display: flex;
-		flex-direction: column;
-		gap: 0.3rem;
-	}
-
-	.metadata-fields span {
-		font-size: 0.75rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		color: #888;
-	}
-
-	.metadata-fields input[type="text"] {
-		padding: 0.45rem 0.6rem;
-		border: 1px solid #ddd;
-		border-radius: 4px;
-		font-size: 0.9rem;
-		color: #2a2a2a;
-		outline: none;
-		transition: border-color 0.15s;
-	}
-
-	.metadata-fields input[type="text"]:focus {
-		border-color: #888;
-	}
-
-	.color-field {
-		display: flex;
-		gap: 0.5rem;
-		align-items: center;
-	}
-
-	.color-field input[type="color"] {
-		width: 2.4rem;
-		height: 2.4rem;
-		padding: 2px;
-		border: 1px solid #ddd;
-		border-radius: 4px;
-		cursor: pointer;
-		flex-shrink: 0;
-		background: none;
-	}
-
-	.color-field input[type="text"] {
-		flex: 1;
-	}
-
 	/* ── Print ────────────────────────────────────── */
 
 	@media print {
@@ -438,9 +261,7 @@
 			overflow: auto;
 		}
 
-		.editor-panel,
-		.metadata-drawer,
-		.metadata-overlay {
+		.editor-panel {
 			display: none;
 		}
 

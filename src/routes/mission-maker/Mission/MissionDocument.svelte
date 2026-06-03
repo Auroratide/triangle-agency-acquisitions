@@ -9,12 +9,10 @@
 	import TitlePage from "./TitlePage.svelte"
 
 	let {
-		theme,
 		metadata,
 		content,
 		images,
 	}: {
-		theme: MissionTheme
 		metadata: MissionMetadata
 		content: string
 		images: Map<string, string>
@@ -26,7 +24,7 @@
 <div
 	class="mission-document"
 	use:scalePages
-	style="--primary-color: {theme.primary || MissionTheme.DEFAULT.primary}; --secondary-color: {theme.secondary || MissionTheme.DEFAULT.secondary}"
+	style="--primary-color: {metadata.primaryColor || MissionTheme.DEFAULT.primary}; --secondary-color: {metadata.secondaryColor || MissionTheme.DEFAULT.secondary}"
 >
 	<TitlePage {metadata} />
 	<LicenseAndCredits {metadata} />
