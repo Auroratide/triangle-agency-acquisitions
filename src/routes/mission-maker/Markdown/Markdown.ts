@@ -6,7 +6,7 @@ import { PageBreak } from "./rules/PageBreak"
 import { SavedImages } from "./rules/SavedImages"
 import { TableCaptions } from "./rules/TableCaptions"
 
-let currentImageMap: ImageMap = new Map()
+const currentImageMap: ImageMap = new Map()
 
 const md = new MarkdownIt({
 	html: true,
@@ -43,7 +43,11 @@ md.renderer.rules.table_open = TableCaptions(md, {
 
 export const Markdown = {
 	renderToPages(content: string, images: ImageMap): string {
-		currentImageMap = images
+		currentImageMap.clear()
+		images.forEach((value, key) => {
+			currentImageMap.set(key, value)
+		})
+
 		const html = md.render(content)
 		const parts = html.split('<div class="page-break"></div>\n')
 		return parts
