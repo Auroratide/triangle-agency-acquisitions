@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      gray-matter-es:
+        specifier: ^0.2.1
+        version: 0.2.1
       idb:
         specifier: ^8.0.3
         version: 8.0.3
@@ -457,6 +460,10 @@ packages:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
+
+  gray-matter-es@0.2.1:
+    resolution: {integrity: sha512-LCBpytO2B2da+CRuO95voiszbEICp2o8CkoKvcCkv4MCgP/TJm78yMPt0IDRq72k3xGHLNofmCAT/+vv3qX3eg==}
+    engines: {node: '>=20.19.6'}
 
   husky@9.1.7:
     resolution: {integrity: sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==}
@@ -1134,6 +1141,8 @@ snapshots:
 
   fsevents@2.3.3:
     optional: true
+
+  gray-matter-es@0.2.1: {}
 
   husky@9.1.7: {}
 

@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { Button } from "$lib/Button"
+	import type { Metadata } from "./Metadata"
 
 	let {
 		metadata = $bindable(),
 		dialog = $bindable(),
 	}: {
-		metadata: any
+		metadata: Metadata
 		dialog: HTMLDialogElement | undefined
 	} = $props()
 
@@ -70,7 +71,7 @@
 			<input
 				id="metadata-artist"
 				type="text"
-				bind:value={metadata.author}
+				bind:value={metadata.artist}
 				placeholder="Artist Name(s)"
 			>
 		</div>

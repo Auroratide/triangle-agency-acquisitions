@@ -4,13 +4,7 @@
 
 <script lang="ts">
 	import { onMount } from "svelte"
-	import {
-		DEFAULT_META,
-		type DocumentMeta,
-		parseFrontmatter,
-		serializeFrontmatter,
-	} from "./frontmatter.ts"
-	import { MetadataDrawer } from "./Metadata"
+	import { DEFAULT_META, Metadata, MetadataDrawer } from "./Metadata"
 	import { MissionDocument } from "./Mission/index.ts"
 	import { extractImageKeys } from "./markdown.ts"
 	import {
@@ -24,7 +18,7 @@
 	import { ToolButton, Toolbar } from "./Toolbar"
 
 	let editorContent = $state("")
-	let meta = $state<DocumentMeta>({ ...DEFAULT_META })
+	let metadata = $state<Metadata>({ ...DEFAULT_META })
 	let imageMap = $state(new Map<string, string>())
 	let previewOnly = $state(false)
 	let loaded = $state(false)
@@ -35,8 +29,8 @@
 	onMount(async () => {
 		const stored = await loadDocument()
 		if (stored) {
-			const { meta: loadedMeta, content } = parseFrontmatter(stored)
-			meta = loadedMeta
+			const { metadata: loadedMeta, content } = Metadata.parse(stored)
+			metadata = loadedMeta
 			editorContent = content
 		}
 		imageMap = await resolveImages(extractImageKeys(editorContent))
@@ -46,15 +40,12 @@
 	// Debounced save to IndexedDB whenever content or metadata changes
 	$effect(() => {
 		if (!loaded) return
-		const snapshot: DocumentMeta = {
-			title: meta.title,
-			subtitle: meta.subtitle,
-			primaryColor: meta.primaryColor,
-			secondaryColor: meta.secondaryColor,
+		const snapshot: Metadata = {
+			...metadata,
 		}
 		const content = editorContent
 		const timer = setTimeout(() => {
-			saveDocument(serializeFrontmatter(snapshot, content))
+			saveDocument(Metadata.serialize(snapshot, content))
 		}, 500)
 		return () => clearTimeout(timer)
 	})
@@ -144,20 +135,7 @@
 
 	<div class="workspace" class:preview-only={previewOnly}>
 		<div class="preview-panel">
-			<MissionDocument
-				metadata={{
-					title: meta.title,
-					subtitle: meta.subtitle,
-					author: "Auroratide",
-					artist: "",
-					updated: new Date(),
-					contentWarnings: "gore, blood",
-					primaryColor: meta.primaryColor,
-					secondaryColor: meta.secondaryColor,
-				}}
-				content={editorContent}
-				images={imageMap}
-			/>
+			<MissionDocument {metadata} content={editorContent} images={imageMap} />
 		</div>
 
 		<div class="editor-panel">
@@ -171,7 +149,7 @@
 		</div>
 	</div>
 
-	<MetadataDrawer bind:dialog bind:metadata={meta} />
+	<MetadataDrawer bind:dialog bind:metadata />
 </div>
 
 <style>
