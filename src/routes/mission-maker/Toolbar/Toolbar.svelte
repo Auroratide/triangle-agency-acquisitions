@@ -52,4 +52,10 @@
 		gap: 0.5em;
 		margin: 0;
 	}
+
+	@media print {
+		.toolbar {
+			display: none;
+		}
+	}
 </style>

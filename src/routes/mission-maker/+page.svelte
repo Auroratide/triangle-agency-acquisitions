@@ -122,6 +122,10 @@
 	function toggleMetadata() {
 		showMetadata = !showMetadata
 	}
+
+	function printPreview() {
+		window.print()
+	}
 </script>
 
 <svelte:head>
@@ -133,6 +137,7 @@
 		<ToolButton onclick={togglePreview}
 			>{previewOnly ? "Show Editor" : "Preview Only"}</ToolButton
 		>
+		<ToolButton onclick={printPreview}>Print/PDF</ToolButton>
 		<ToolButton onclick={toggleMetadata}>Edit Metadata</ToolButton>
 	</Toolbar>
 
