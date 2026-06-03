@@ -139,7 +139,9 @@
 		</div>
 
 		<div class="editor-panel">
+			<label for="editor-textarea" class="visually-hidden">Editor</label>
 			<textarea
+				id="editor-textarea"
 				bind:this={textarea}
 				bind:value={editorContent}
 				onpaste={handlePaste}
@@ -158,10 +160,8 @@
 		flex-direction: column;
 		height: 100vh;
 		overflow: hidden;
-		background: #f0f0f0;
+		background: var(--bg);
 	}
-
-	/* ── Workspace ────────────────────────────────── */
 
 	.workspace {
 		display: flex;
@@ -169,21 +169,16 @@
 		overflow: hidden;
 	}
 
-	/* ── Preview panel ────────────────────────────── */
-
 	.preview-panel {
 		flex: 1;
 		overflow: auto;
-		background: #c8c8c8;
+		background: oklch(0.85 0 0);
 	}
-
-	/* ── Editor panel ─────────────────────────────── */
 
 	.editor-panel {
 		flex: 1;
 		display: flex;
 		flex-direction: column;
-		border-left: 1px solid #d0d0d0;
 		overflow: hidden;
 	}
 
@@ -192,26 +187,21 @@
 		resize: none;
 		border: none;
 		outline: none;
-		padding: 1.25rem;
+		padding: 1.25em;
 		font-family:
 			"Cascadia Code", "JetBrains Mono", "Fira Code", ui-monospace, monospace;
-		font-size: 13px;
+		font-size: 0.875em;
 		line-height: 1.65;
-		background: #fafafa;
-		color: #2a2a2a;
-		width: 100%;
-		box-sizing: border-box;
+		background: var(--agency-gray);
+		color: var(--text);
+		inline-size: 100%;
 	}
-
-	/* ── Preview-only mode ────────────────────────── */
 
 	.workspace.preview-only .editor-panel {
 		display: none;
 	}
 
-	/* ── Mobile ───────────────────────────────────── */
-
-	@media (max-width: 767px) {
+	@media (max-width: 50rem) {
 		.preview-panel {
 			display: none;
 		}
@@ -221,7 +211,7 @@
 		}
 	}
 
-	@media (max-width: 767px) {
+	@media (max-width: 50rem) {
 		.workspace.preview-only .preview-panel {
 			display: flex;
 			flex: 1;
@@ -232,13 +222,7 @@
 		}
 	}
 
-	/* ── Print ────────────────────────────────────── */
-
 	@media print {
-		:global(body) {
-			overflow: auto;
-		}
-
 		.editor-panel {
 			display: none;
 		}
@@ -257,22 +241,6 @@
 			display: block;
 			overflow: visible;
 			background: none;
-		}
-
-		:global(.preview-container .page) {
-			zoom: 1;
-			width: 100%;
-			min-height: auto;
-			padding: 0;
-			box-shadow: none;
-			margin: 0;
-			break-after: page;
-			page-break-after: always;
-		}
-
-		:global(.preview-container .page:last-child) {
-			break-after: avoid;
-			page-break-after: avoid;
 		}
 	}
 

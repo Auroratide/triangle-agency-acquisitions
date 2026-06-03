@@ -577,4 +577,9 @@
 		page-break-after: always;
 		zoom: 0.971; /* I don't know why this number */
 	}
+
+	.mission-document .page:last-child {
+		break-after: avoid;
+		page-break-after: avoid;
+	}
 }
