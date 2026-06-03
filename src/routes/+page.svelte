@@ -33,21 +33,6 @@
 					href="/mission-maker"
 					description="Easily create beautiful documents of missions that you can share with the community, using just a text-based editor! What, it's not wysiwyg? Yeah, we know. They didn't have wysiwyg in the 80s, you'll figure it out."
 				/>
-				<ToolCard
-					title="Mission Maker"
-					href="/mission-maker"
-					description="Easily create beautiful documents of missions that you can share with the community, using just a text-based editor! What, it's not wysiwyg? Yeah, we know. They didn't have wysiwyg in the 80s, you'll figure it out."
-				/>
-				<ToolCard
-					title="Mission Maker"
-					href="/mission-maker"
-					description="Easily create beautiful documents of missions that you can share with the community, using just a text-based editor! What, it's not wysiwyg? Yeah, we know. They didn't have wysiwyg in the 80s, you'll figure it out."
-				/>
-				<ToolCard
-					title="Mission Maker"
-					href="/mission-maker"
-					description="Easily create beautiful documents of missions that you can share with the community, using just a text-based editor! What, it's not wysiwyg? Yeah, we know. They didn't have wysiwyg in the 80s, you'll figure it out."
-				/>
 			</nav>
 		</main>
 	</div>
