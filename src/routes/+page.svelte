@@ -33,6 +33,21 @@
 					href="/mission-maker"
 					description="Easily create beautiful documents of missions that you can share with the community, using just a text-based editor! What, it's not wysiwyg? Yeah, we know. They didn't have wysiwyg in the 80s, you'll figure it out."
 				/>
+				<ToolCard
+					title="Mission Maker"
+					href="/mission-maker"
+					description="Easily create beautiful documents of missions that you can share with the community, using just a text-based editor! What, it's not wysiwyg? Yeah, we know. They didn't have wysiwyg in the 80s, you'll figure it out."
+				/>
+				<ToolCard
+					title="Mission Maker"
+					href="/mission-maker"
+					description="Easily create beautiful documents of missions that you can share with the community, using just a text-based editor! What, it's not wysiwyg? Yeah, we know. They didn't have wysiwyg in the 80s, you'll figure it out."
+				/>
+				<ToolCard
+					title="Mission Maker"
+					href="/mission-maker"
+					description="Easily create beautiful documents of missions that you can share with the community, using just a text-based editor! What, it's not wysiwyg? Yeah, we know. They didn't have wysiwyg in the 80s, you'll figure it out."
+				/>
 			</nav>
 		</main>
 	</div>
@@ -44,10 +59,11 @@
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		max-inline-size: 1920px;
+		max-inline-size: min(1920px, 100%);
 		min-block-size: 100vh;
 		margin-inline: auto;
 		container-type: inline-size;
+		overflow: hidden;
 	}
 
 	.bg {

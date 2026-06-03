@@ -24,6 +24,7 @@
 		background: var(--bg);
 		inline-size: 100%;
 		position: relative;
+		margin: 0 0 1.5em 0;
 		transition:
 			border-color 0.125s ease-in-out,
 			transform 0.125s ease-in-out,
