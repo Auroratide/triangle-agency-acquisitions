@@ -17,6 +17,9 @@
 	},
 	"license": "MIT",
 	"packageManager": "pnpm@11.5.0",
+	"engines": {
+		"node": ">=22.13"
+	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.16",
 		"@sveltejs/adapter-static": "^3.0.10",
