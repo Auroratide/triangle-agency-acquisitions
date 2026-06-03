@@ -62,10 +62,10 @@ export const Markdown = {
 	},
 	extractImageKeys(content: string): Set<string> {
 		const keys = new Set<string>()
-		const regex = /\(image:([^)\s]+)\)/g
+		const regex = /\(image:([^)\s]+)\)|"image:([^"\s]+)"/g
 		let match = regex.exec(content)
 		while (match !== null) {
-			keys.add(match[1])
+			keys.add(match[1] ?? match[2])
 			match = regex.exec(content)
 		}
 		return keys

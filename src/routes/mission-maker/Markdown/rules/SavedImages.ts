@@ -11,6 +11,22 @@ export function SavedImages(imageMap: ImageMap, mdIt: MarkdownIt): RenderRule {
 		throw new Error("No image renderer found?")
 	}
 
+	function resolveImageSrcs(html: string): string {
+		return html.replace(/src="image:([^"]+)"/g, (_, key) => {
+			const dataUrl = imageMap.get(key) ?? ""
+			return `src="${mdIt.utils.escapeHtml(dataUrl)}"`
+		})
+	}
+
+	const defaultHtmlInline = mdIt.renderer.rules.html_inline!
+	const defaultHtmlBlock = mdIt.renderer.rules.html_block!
+
+	mdIt.renderer.rules.html_inline = (tokens, idx, options, env, self) =>
+		resolveImageSrcs(defaultHtmlInline(tokens, idx, options, env, self))
+
+	mdIt.renderer.rules.html_block = (tokens, idx, options, env, self) =>
+		resolveImageSrcs(defaultHtmlBlock(tokens, idx, options, env, self))
+
 	return (tokens, idx, options, env, self) => {
 		const token = tokens[idx]
 		const src = token.attrGet("src") ?? ""
