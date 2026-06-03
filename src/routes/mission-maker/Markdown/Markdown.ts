@@ -2,9 +2,11 @@ import MarkdownIt from "markdown-it"
 import type { ImageMap } from "./ImageMap"
 import { ChaosTable } from "./rules/ChaosTable"
 import { CustomList } from "./rules/CustomList"
+import { Icons } from "./rules/Icons"
 import { PageBreak } from "./rules/PageBreak"
 import { SavedImages } from "./rules/SavedImages"
 import { TableCaptions } from "./rules/TableCaptions"
+import { TableLineBreaks } from "./rules/TableLineBreaks"
 
 const currentImageMap: ImageMap = new Map()
 
@@ -40,6 +42,10 @@ md.core.ruler.before("inline", "chaos-table", ChaosTable())
 md.renderer.rules.table_open = TableCaptions(md, {
 	"chaos-table": "<i>▲</i> Introduced in this mission",
 })
+
+md.inline.ruler.push("icon", Icons())
+
+md.core.ruler.push("table-cell-linebreak", TableLineBreaks())
 
 export const Markdown = {
 	renderToPages(content: string, images: ImageMap): string {

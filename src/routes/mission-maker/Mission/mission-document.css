@@ -111,8 +111,16 @@
 		margin-block-start: 0;
 	}
 
+	/*  Images
+	 *  ===================================================================== */
 	img {
-		max-width: 100%;
+		max-block-size: 100%;
+	}
+
+	img.icon {
+		display: inline-block;
+		block-size: 1em;
+		vertical-align: middle;
 	}
 
 	/*  LISTS
@@ -199,6 +207,7 @@
 		inline-size: 3em;
 		block-size: 3em;
 		inset-inline-start: -1.7em;
+		inset-block-start: 0;
 		-webkit-mask-image: url("/icons/agent-personal-anomaly.svg");
 		mask-image: url("/icons/agent-personal-anomaly.svg");
 	}
@@ -252,8 +261,13 @@
 		}
 
 		td {
+			min-inline-size: 3em;
 			padding: 10pt;
 			border-inline-end: calc(var(--border-width) - 1pt) solid var(--agency-ink);
+		}
+
+		td > *:first-child {
+			margin-block-start: 0;
 		}
 
 		td:last-child {
@@ -269,6 +283,11 @@
 
 		tr:nth-child(even) td {
 			background: var(--agency-gray);
+		}
+
+		td br + span.space {
+			display: block;
+			height: 0.875em;
 		}
 	}
 
