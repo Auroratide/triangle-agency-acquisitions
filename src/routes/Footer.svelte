@@ -61,17 +61,6 @@
 		display: inline-block;
 	}
 
-	/* .footer-links li::after {
-				content: "▲";
-				display: inline-block;
-				margin-inline-start: 2em;
-				font-size: 0.5em;
-			}
-
-			.footer-links li:last-child::after {
-				display: none;
-			} */
-
 	.license {
 		font-size: 0.625em;
 		text-align: center;
