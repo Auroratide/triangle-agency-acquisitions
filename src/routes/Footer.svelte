@@ -9,7 +9,11 @@
 					>Support Haunted Table</a
 				>
 			</li>
-			<li><a href="https://github.com">Source Code</a></li>
+			<li>
+				<a href="https://github.com/Auroratide/triangle-agency-acquisitions"
+					>Source Code</a
+				>
+			</li>
 		</ul>
 		<p class="license">
 			Triangle Agency Acquisitions is an independent production by Auroratide
@@ -58,15 +62,15 @@
 	}
 
 	/* .footer-links li::after {
-			content: "▲";
-			display: inline-block;
-			margin-inline-start: 2em;
-			font-size: 0.5em;
-		}
+				content: "▲";
+				display: inline-block;
+				margin-inline-start: 2em;
+				font-size: 0.5em;
+			}
 
-		.footer-links li:last-child::after {
-			display: none;
-		} */
+			.footer-links li:last-child::after {
+				display: none;
+			} */
 
 	.license {
 		font-size: 0.625em;
