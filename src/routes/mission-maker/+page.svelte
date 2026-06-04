@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte"
+	import { PageMeta } from "$lib/PageMeta"
 	import { Markdown } from "./Markdown/index.ts"
 	import { DEFAULT_META, Metadata, MetadataDrawer } from "./Metadata"
 	import { MissionDocument } from "./Mission/index.ts"
@@ -123,9 +124,10 @@
 	}
 </script>
 
-<svelte:head>
-	<title>Mission Maker | Triangle Agency</title>
-</svelte:head>
+<PageMeta
+	title="Mission Maker"
+	description="Create missions and documents for the tabletop game, Triangle Agency"
+/>
 
 <main class="app">
 	<Toolbar>

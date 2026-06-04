@@ -1,11 +1,13 @@
 <script lang="ts">
+	import { PageMeta } from "$lib/PageMeta"
 	import { ToolCard } from "$lib/ToolCard"
 	import Footer from "./Footer.svelte"
 </script>
 
-<svelte:head>
-	<title>Triangle Agency Acquisitions</title>
-</svelte:head>
+<PageMeta
+	title="Triangle Agency Acquisitions"
+	description="Community tools for the tabletop game, Triangle Agency"
+/>
 
 <div class="wrapper">
 	<div class="bg"></div>
