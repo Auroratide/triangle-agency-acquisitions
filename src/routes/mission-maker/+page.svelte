@@ -127,7 +127,7 @@
 	<title>Mission Maker | Triangle Agency</title>
 </svelte:head>
 
-<div class="app">
+<main class="app">
 	<Toolbar>
 		<ToolButton onclick={togglePreview}>
 			{previewOnly ? "Show Editor" : "Preview Only"}
@@ -155,7 +155,7 @@
 	</div>
 
 	<MetadataDrawer bind:dialog bind:metadata />
-</div>
+</main>
 
 <style>
 	.app {
