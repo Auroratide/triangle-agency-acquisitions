@@ -5,8 +5,8 @@ updated: 2026-06-03T12:00:00.000Z
 author: 
 artist: 
 contentWarnings: 
-primaryColor: #983d99
-secondaryColor: #5c2aa7
+primaryColor: '#983d99'
+secondaryColor: '#5c2aa7'
 ---
 
 ## Anomaly Profile
