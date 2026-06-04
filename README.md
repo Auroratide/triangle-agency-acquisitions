@@ -24,13 +24,3 @@ pnpm dev
 ```
 
 There aren't any meaningful tests right now, but I will add some if the project somehow gains traction.
-
-## AI Usage
-
-I wrote most of the code. All text, designs, and images used on the site are by me.
-
-Claude was used to generate some code snippets, all of which have been clearly documented with what prompt was used directly in the code.
-
-Do not use LLMs on this site to generate any **content** for Triangle Agency. Doing so is a violation of their license:
-
-> 2. Your product cannot use LLMs or “generative AI” in its text or images.
