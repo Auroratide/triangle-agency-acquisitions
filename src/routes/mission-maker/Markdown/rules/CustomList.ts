@@ -1,5 +1,12 @@
 import type { StateCore } from "markdown-it/index.js"
 
+/*
+ * Sonnet 4.6
+ * How would I go about adding a new rule to the markdown system? For example, what if I want `?- ` to denote a special list which in html becomes `<ul class="question-list">`?
+ *
+ * Note: This code has been manually refactored to allow any possible list.
+ */
+
 /**
  * Creates a rule for a list defined by a custom list of symbols. For instance, this lets you create a list like this:
  * ?- Point 1

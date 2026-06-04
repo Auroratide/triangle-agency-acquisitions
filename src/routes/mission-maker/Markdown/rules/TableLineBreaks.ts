@@ -1,6 +1,16 @@
 import type { Token } from "markdown-it/index.js"
 import type { RuleCore } from "markdown-it/lib/parser_core.mjs"
 
+/*
+ * Sonnet 4.6
+ * Is it possible to make a rule that only works inside of a table cell? Specifically, when a `//` appears, it renders out as `<br><span class="space"></span>`? Would this interfere with http:// link syntax? If so,  maybe a triple `///` would work better?
+ */
+
+/**
+ * Allows shorthand for linebreaks via `///`. This is because I cannot style
+ * <br /> tags in Chrome, and so to get what would look like separate paragraphs
+ * would require double <br />.
+ */
 export function TableLineBreaks(): RuleCore {
 	return (state) => {
 		const { tokens, Token } = state

@@ -1,5 +1,15 @@
 import type { StateCore } from "markdown-it/index.js"
 
+/*
+ * Sonnet 4.6
+ * I want to define a special table. Consider the following syntax which is used to define tables in markdown. I want to make it so that if the table's first cell is "Chaos", then the table gets the class "chaos-table". The second thing is more complicated, so let me know whether it is doable in the markdown-it extension mechanism. The second  column in some rows is the title of a chaos power. These names are  standardized for the most part ("Corrupt", "Manifest", "Expand", and others are all considered standard). Some names are custom (such as "Echo"). I want  to define a list of standard words, and if the second cell in a row is NOT one of the standard words, then the whole row gets a class "new-effect". Here is the table:
+  | Chaos | Name    | Effect   |
+  | ----- | ------- | -------- |
+  | 2     | Corrupt | This is a bunch of text? But what if |
+  | 2     | Echo | This is a new ability |
+  | 4     | Manifest | Some more text. <br /> Some other text. |
+ */
+
 const STANDARD_CHAOS_POWERS = new Set([
 	"Distort",
 	"Corrupt",

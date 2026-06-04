@@ -1,6 +1,11 @@
 import type MarkdownIt from "markdown-it"
 import type { RenderRule } from "markdown-it/lib/renderer.mjs"
 
+/*
+ * Sonnet 4.6
+ * Is it possible to also add a hardcoded caption to the table?
+ */
+
 /**
  * If a custom table is defined, a separate rule is needed to add a caption to it.
  * @param caption { "my-table": "My caption" }

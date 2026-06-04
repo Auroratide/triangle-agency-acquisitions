@@ -1,5 +1,13 @@
 import type { StateInline } from "markdown-it/index.js"
 
+/*
+ * Sonnet 4.6
+ * Can you make a markdown rule that expands `@icon-name@` to `<img class="icon" alt="Icon Name" src="/icons/icon-name.svg" />`
+ */
+
+/**
+ * Syntax: @icon-name@
+ */
 export function Icons() {
 	return (state: StateInline, silent: boolean) => {
 		if (state.src.charCodeAt(state.pos) !== 0x40 /* @ */) return false
