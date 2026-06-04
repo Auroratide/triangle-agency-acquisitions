@@ -34,5 +34,3 @@ Claude was used to generate some code snippets, all of which have been clearly d
 Do not use LLMs on this site to generate any **content** for Triangle Agency. Doing so is a violation of their license:
 
 > 2. Your product cannot use LLMs or “generative AI” in its text or images.
-
-Make missions using your own creativity!
