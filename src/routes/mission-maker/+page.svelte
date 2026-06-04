@@ -140,7 +140,9 @@
 
 	<div class="workspace" class:preview-only={previewOnly}>
 		<div class="preview-panel">
-			<MissionDocument {metadata} content={editorContent} images={imageMap} />
+			{#if loaded}
+				<MissionDocument {metadata} content={editorContent} images={imageMap} />
+			{/if}
 		</div>
 
 		<div class="editor-panel">
@@ -152,6 +154,7 @@
 				onpaste={handlePaste}
 				spellcheck={false}
 				placeholder="Write your mission in markdown...&#10;&#10;Use --- to create a new page."
+				disabled={!loaded}
 			></textarea>
 		</div>
 	</div>
@@ -200,6 +203,10 @@
 		background: var(--agency-gray);
 		color: var(--text);
 		inline-size: 100%;
+	}
+
+	.editor-panel textarea:disabled {
+		opacity: 0.5;
 	}
 
 	.workspace.preview-only .editor-panel {
