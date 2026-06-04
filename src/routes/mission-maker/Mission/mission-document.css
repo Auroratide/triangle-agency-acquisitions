@@ -9,6 +9,7 @@
 	--border-radius: 12.5pt;
 
 	padding: 2rem;
+	max-width: 100%;
 	min-height: 100%;
 	box-sizing: border-box;
 	counter-reset: page-number 0;

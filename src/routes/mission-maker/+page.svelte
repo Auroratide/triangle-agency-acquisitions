@@ -214,16 +214,10 @@
 		.editor-panel {
 			border-left: none;
 		}
-	}
 
-	@media (max-width: 50rem) {
 		.workspace.preview-only .preview-panel {
 			display: flex;
 			flex: 1;
-		}
-
-		.workspace.preview-only .editor-panel {
-			display: none;
 		}
 	}
 
