@@ -44,6 +44,7 @@
 		display: flex;
 		align-items: center;
 		gap: 0.5em;
+		flex: 1;
 	}
 
 	nav a {
@@ -58,8 +59,11 @@
 		list-style: none;
 		padding: 0;
 		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
 		gap: 0.5em;
 		margin: 0;
+		flex: 1;
 	}
 
 	.small-screens {
@@ -83,6 +87,7 @@
 
 		menu {
 			font-size: 0.875em;
+			justify-content: center;
 		}
 	}
 

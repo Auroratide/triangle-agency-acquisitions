@@ -1,43 +1,37 @@
 <script lang="ts">
 	import { onMount } from "svelte"
+	import { type DocumentIdAndName, Id, MissionDatabase } from "$lib/db"
 	import { PageMeta } from "$lib/PageMeta"
 	import { Guide } from "./Guide"
 	import { Markdown } from "./Markdown/index.ts"
 	import { DEFAULT_META, Metadata, MetadataDrawer } from "./Metadata"
 	import { MissionDocument } from "./Mission/index.ts"
 	import { TemplateMission } from "./Mission/TemplateMission.ts"
-	import {
-		deleteImage,
-		getAllImageKeys,
-		loadDocument,
-		loadImage,
-		saveDocument,
-		saveImage,
-	} from "./storage.ts"
+	import { MissionSelect } from "./MissionSelect/index.ts"
 	import { ToolButton, Toolbar } from "./Toolbar"
 
+	let currentDocumentId = $state("")
 	let editorContent = $state("")
 	let metadata = $state<Metadata>({ ...DEFAULT_META })
 	let imageMap = $state(new Map<string, string>())
 	let previewOnly = $state(false)
 	let showGuide = $state(false)
 	let loaded = $state(false)
+	let missions = $state<DocumentIdAndName[]>([])
 
 	let textarea: HTMLTextAreaElement | undefined = $state()
-	let dialog: HTMLDialogElement | undefined = $state()
+	let metadataDrawer: HTMLDialogElement | undefined = $state()
+	let missionSelectDrawer: HTMLDialogElement | undefined = $state()
 
 	onMount(async () => {
-		const stored = await loadDocument()
+		currentDocumentId = MissionDatabase.currentDocumentId()
+		const stored = await MissionDatabase.loadDocument(currentDocumentId)
 		if (stored) {
 			const { metadata: loadedMeta, content } = Metadata.parse(stored)
 			metadata = loadedMeta
 			editorContent = content
 		} else {
-			const { metadata: loadedMeta, content } = Metadata.parse(
-				TemplateMission(),
-			)
-			metadata = loadedMeta
-			editorContent = content
+			newMission()
 		}
 		imageMap = await resolveImages(Markdown.extractImageKeys(editorContent))
 		loaded = true
@@ -51,7 +45,11 @@
 		}
 		const content = editorContent
 		const timer = setTimeout(() => {
-			saveDocument(Metadata.serialize(snapshot, content))
+			MissionDatabase.saveDocument(
+				currentDocumentId,
+				snapshot.title,
+				Metadata.serialize(snapshot, content),
+			)
 		}, 500)
 		return () => clearTimeout(timer)
 	})
@@ -73,17 +71,17 @@
 	): Promise<Map<string, string>> {
 		const map = new Map<string, string>()
 		for (const key of keys) {
-			const data = await loadImage(key)
+			const data = await MissionDatabase.loadImage(key)
 			if (data) map.set(key, data)
 		}
 		return map
 	}
 
 	async function purgeOrphanedImages(currentKeys: Set<string>): Promise<void> {
-		const allKeys = await getAllImageKeys()
+		const allKeys = await MissionDatabase.getAllImageKeys()
 		for (const key of allKeys) {
 			if (!currentKeys.has(key)) {
-				await deleteImage(key)
+				await MissionDatabase.deleteImage(key)
 			}
 		}
 	}
@@ -102,7 +100,7 @@
 				reader.onload = async () => {
 					const dataUrl = reader.result as string
 					const key = crypto.randomUUID()
-					await saveImage(key, dataUrl)
+					await MissionDatabase.saveImage(key, dataUrl)
 					const ref = `![pasted image](image:${key})`
 					editorContent =
 						editorContent.slice(0, start) + ref + editorContent.slice(end)
@@ -118,7 +116,7 @@
 	}
 
 	function toggleMetadata() {
-		dialog?.showModal()
+		metadataDrawer?.showModal()
 	}
 
 	function toggleGuide() {
@@ -127,6 +125,32 @@
 
 	function printPreview() {
 		window.print()
+	}
+
+	async function toggleMissionSelect() {
+		missions = await MissionDatabase.listDocuments()
+		missionSelectDrawer?.showModal()
+	}
+
+	async function selectMission(id: Id) {
+		const stored = await MissionDatabase.loadDocument(id)
+		if (stored) {
+			const { metadata: loadedMeta, content } = Metadata.parse(stored)
+
+			currentDocumentId = id
+			metadata = loadedMeta
+			editorContent = content
+		}
+	}
+
+	async function newMission() {
+		const { metadata: loadedMeta, content } = Metadata.parse(TemplateMission())
+		const id = Id.new()
+		await MissionDatabase.saveDocument(id, loadedMeta.title, content)
+
+		currentDocumentId = id
+		metadata = loadedMeta
+		editorContent = content
 	}
 </script>
 
@@ -144,6 +168,7 @@
 			{showGuide ? "Hide Guide" : "Show Guide"}
 		</ToolButton>
 		<ToolButton onclick={printPreview}>Print/PDF</ToolButton>
+		<ToolButton onclick={toggleMissionSelect}>Select Mission</ToolButton>
 		<ToolButton onclick={toggleMetadata}>Edit Metadata</ToolButton>
 	</Toolbar>
 
@@ -169,7 +194,14 @@
 		</div>
 	</div>
 
-	<MetadataDrawer bind:dialog bind:metadata />
+	<MetadataDrawer bind:dialog={metadataDrawer} bind:metadata />
+	<MissionSelect
+		bind:dialog={missionSelectDrawer}
+		selected={currentDocumentId}
+		{missions}
+		onselect={selectMission}
+		onnew={newMission}
+	/>
 </main>
 
 <style>
