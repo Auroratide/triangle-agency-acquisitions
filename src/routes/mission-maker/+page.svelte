@@ -137,10 +137,10 @@
 
 <main class="app">
 	<Toolbar>
-		<ToolButton onclick={togglePreview}>
+		<ToolButton onclick={togglePreview} active={previewOnly}>
 			{previewOnly ? "Show Editor" : "Preview Only"}
 		</ToolButton>
-		<ToolButton onclick={toggleGuide}>
+		<ToolButton onclick={toggleGuide} active={showGuide}>
 			{showGuide ? "Hide Guide" : "Show Guide"}
 		</ToolButton>
 		<ToolButton onclick={printPreview}>Print/PDF</ToolButton>

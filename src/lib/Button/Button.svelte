@@ -6,7 +6,7 @@
 		children,
 		onclick,
 	}: {
-		variant?: "gray" | "ink"
+		variant?: "gray" | "ink" | "yellow"
 		children?: Snippet
 		onclick?: () => void
 	} = $props()
@@ -34,6 +34,10 @@
 		color: var(--agency-ink);
 	}
 
+	button.yellow {
+		color: var(--reality-yellow);
+	}
+
 	button.gray:hover,
 	button.gray:focus-visible {
 		color: var(--reality-yellow);
@@ -42,6 +46,11 @@
 	button.ink:hover,
 	button.ink:focus-visible {
 		color: var(--agency-red);
+	}
+
+	button.yellow:hover,
+	button.yellow:focus-visible {
+		color: var(--agency-gray);
 	}
 
 	button:active {

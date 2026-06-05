@@ -5,10 +5,16 @@
 	let {
 		children,
 		onclick,
+		active = false,
 	}: {
 		children?: Snippet
 		onclick?: () => void
+		active?: boolean
 	} = $props()
 </script>
 
-<li><Button variant="gray" {onclick}>{@render children?.()}</Button></li>
+<li>
+	<Button variant={active ? "yellow" : "gray"} {onclick}
+		>{@render children?.()}</Button
+	>
+</li>
