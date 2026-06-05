@@ -75,6 +75,7 @@
 		inset-block-start: 0.75em;
 		block-size: 0;
 		overflow: visible;
+		z-index: 9;
 	}
 
 	.close {
@@ -90,6 +91,5 @@
 		justify-content: center;
 		width: 2.5em;
 		height: 2.5em;
-		z-index: 9;
 	}
 </style>
