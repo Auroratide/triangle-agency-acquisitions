@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte"
 	import { PageMeta } from "$lib/PageMeta"
+	import { Guide } from "./Guide"
 	import { Markdown } from "./Markdown/index.ts"
 	import { DEFAULT_META, Metadata, MetadataDrawer } from "./Metadata"
 	import { MissionDocument } from "./Mission/index.ts"
@@ -19,6 +20,7 @@
 	let metadata = $state<Metadata>({ ...DEFAULT_META })
 	let imageMap = $state(new Map<string, string>())
 	let previewOnly = $state(false)
+	let showGuide = $state(false)
 	let loaded = $state(false)
 
 	let textarea: HTMLTextAreaElement | undefined = $state()
@@ -119,6 +121,10 @@
 		dialog?.showModal()
 	}
 
+	function toggleGuide() {
+		showGuide = !showGuide
+	}
+
 	function printPreview() {
 		window.print()
 	}
@@ -134,13 +140,17 @@
 		<ToolButton onclick={togglePreview}>
 			{previewOnly ? "Show Editor" : "Preview Only"}
 		</ToolButton>
+		<ToolButton onclick={toggleGuide}>
+			{showGuide ? "Hide Guide" : "Show Guide"}
+		</ToolButton>
 		<ToolButton onclick={printPreview}>Print/PDF</ToolButton>
 		<ToolButton onclick={toggleMetadata}>Edit Metadata</ToolButton>
 	</Toolbar>
 
 	<div class="workspace" class:preview-only={previewOnly}>
-		<div class="preview-panel">
+		<div class="preview-panel" class:guide-visible={showGuide}>
 			{#if loaded}
+				<Guide {metadata} expanded={showGuide} onclose={toggleGuide} />
 				<MissionDocument {metadata} content={editorContent} images={imageMap} />
 			{/if}
 		</div>
@@ -181,6 +191,11 @@
 		flex: 1;
 		overflow: auto;
 		background: oklch(0.85 0 0);
+		position: relative;
+	}
+
+	.guide-visible {
+		overflow: hidden;
 	}
 
 	.editor-panel {
@@ -222,9 +237,14 @@
 			border-left: none;
 		}
 
-		.workspace.preview-only .preview-panel {
+		.workspace.preview-only .preview-panel,
+		.preview-panel.guide-visible {
 			display: flex;
 			flex: 1;
+		}
+
+		.guide-visible + .editor-panel {
+			display: none;
 		}
 	}
 

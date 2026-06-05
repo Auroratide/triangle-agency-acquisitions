@@ -11,13 +11,19 @@
 		metadata,
 		content,
 		images,
+		nopages = false,
 	}: {
 		metadata: MissionMetadata
 		content: string
 		images: Map<string, string>
+		nopages?: boolean
 	} = $props()
 
-	let renderedHtml = $derived(Markdown.renderToPages(content, images))
+	let renderedHtml = $derived(
+		nopages
+			? Markdown.renderWithoutPages(content, images)
+			: Markdown.renderToPages(content, images),
+	)
 </script>
 
 <div
@@ -25,7 +31,9 @@
 	use:scalePages
 	style="--primary-color: {metadata.primaryColor || MissionTheme.DEFAULT.primary}; --secondary-color: {metadata.secondaryColor || MissionTheme.DEFAULT.secondary}"
 >
-	<TitlePage {metadata} />
-	<LicenseAndCredits {metadata} />
+	{#if !nopages}
+		<TitlePage {metadata} />
+		<LicenseAndCredits {metadata} />
+	{/if}
 	{@html renderedHtml}
 </div>

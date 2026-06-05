@@ -121,7 +121,7 @@
 	img.icon {
 		display: inline-block;
 		block-size: 0.75em;
-		vertical-align: baseline;
+		vertical-align: middle;
 	}
 
 	/*  LISTS
@@ -373,6 +373,17 @@
 		}
 	}
 
+	/*  CODE
+	 *  ===================================================================== */
+	pre {
+		border: var(--border-width) solid var(--agency-ink);
+		border-radius: var(--border-radius);
+		background: var(--agency-gray);
+		padding: 1em;
+		line-height: 1.5;
+		text-wrap: wrap;
+	}
+
 	/*  CUSTOM ELEMENTS
 	 *  ===================================================================== */
 	two-columns {
@@ -400,6 +411,10 @@
 	one-column + one-column {
 		float: inline-end;
 		margin-inline-start: 0.125in;
+	}
+
+	one-column + one-column + * {
+		clear: both;
 	}
 
 	major-callout {

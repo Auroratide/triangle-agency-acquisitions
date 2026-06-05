@@ -63,6 +63,15 @@ export const Markdown = {
 			.map((part) => `<section class="page">${part}</section>`)
 			.join("\n")
 	},
+	renderWithoutPages(content: string, images: ImageMap): string {
+		currentImageMap.clear()
+		images.forEach((value, key) => {
+			currentImageMap.set(key, value)
+		})
+
+		const html = md.render(content)
+		return html
+	},
 	extractImageKeys(content: string): Set<string> {
 		const keys = new Set<string>()
 		const regex = /\(image:([^)\s]+)\)|"image:([^"\s]+)"/g

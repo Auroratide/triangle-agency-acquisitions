@@ -10,7 +10,7 @@
 
 <header class="toolbar">
 	<nav>
-		<span class="tool-name">Mission Maker</span>
+		<h1 class="tool-name">Mission Maker</h1>
 		<span class="divider">▲</span>
 		<span class="site-title"
 			><a href="/">
@@ -32,6 +32,10 @@
 		padding: 0.5em 1em;
 		background: var(--agency-ink);
 		color: var(--bg);
+	}
+
+	.tool-name {
+		font-size: 1em;
 	}
 
 	nav {
